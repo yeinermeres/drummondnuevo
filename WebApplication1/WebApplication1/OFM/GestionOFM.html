@@ -1,0 +1,313 @@
+﻿<style>
+    .foo {
+        display: block;
+        position: relative;
+        width: 300px;
+        margin: auto;
+        cursor: pointer;
+        border: 0;
+        height: 60px;
+        border-radius: 5px;
+        outline: 0;
+    }
+
+        .foo:hover:after {
+            background: #D4D0CE;
+        }
+
+        .foo:after {
+            transition: 200ms all ease;
+            border-bottom: 2px solid rgba(0,0,0,.2);
+            background: #D4D0CE;
+            text-shadow: 0 2px 0 rgba(0,0,0,.2);
+            color: #fff;
+            font-size: 20px;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            content: 'Adjuntar Documentos';
+            line-height: 60px;
+            border-radius: 5px;
+        }
+</style>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li>
+                <a href="#/">Inicio</a>
+            </li>
+            <li>
+                <a>Oferta Mercantil</a>
+            </li>
+            <li class="active">
+                <strong>Registro de Proyectos</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeIn">
+
+    <div class="row">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h2>Gestion Oferta mercantil </h2>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="DatoBasic#tab-1"> Datos basicos</a></li>
+                            <li class=""><a data-toggle="tab" href="DatoBasic#tab-2">Polizas</a></li>
+                            <li class=""><a data-toggle="tab" href="DatoBasic#tab-3">Documentos</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active">
+                                <div class="panel-body">
+                                    <div class="form-group col-lg-3">
+                                        <label>Proceso Competitivo</label>
+                                        <input type="text" placeholder="" class="form-control" title="Clic para cargar listado de proceso competitivos" ng-click="Modal();" ng-model="OFM.DETALLE_PS ">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label>Nº  de Contrato</label>
+                                        <input type="text" placeholder="" class="form-control" ng-model="OFM.N_OFM">
+                                    </div>
+
+                                    <div class="form-group col-lg-3" id="data_1">
+                                        <label class="font-noraml">Fecha de Suspcrición</label>
+                                        <div class="input-group date">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span><input type="text" class="form-control" value="{{CurrentDate | date:'MM/dd/yyyy'}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-lg-3" id="data_1">
+                                        <label class="font-noraml">Fecha de Inicio</label>
+                                        <div class="input-group date">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span><input type="text" class="form-control" ng-model="OFM.FECHA_INIC_OFM">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-lg-3" id="data_1">
+                                        <label class="font-noraml">Fecha de Finalización</label>
+                                        <div class="input-group date">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span><input type="text" class="form-control" ng-model="OFM.FECHA_FINAL_OFM">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label>Vigencia Del contrato</label>
+                                        <input type="text" placeholder="" class="form-control" ng-model="OFM.VIGENCIA">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label>Titulo Del Contrato</label>
+                                        <input type="text" placeholder="" class="form-control" ng-model="OFM.TITULO_OFM">
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                        <label>Proveedor/Contratista</label>
+                                        <input type="text" placeholder="" class="form-control" ng-model="OFM.CONTRATISTA">
+                                    </div>
+
+                                    <div class="form-group col-lg-9">
+                                        <label>Objeto Del Contrato</label>
+                                        <input type="text" placeholder="" class="form-control" ng-model="OFM.OBJETO_OFM">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label>Lugar de Ejecución</label>
+                                        <input type="text" placeholder="" class="form-control" ng-model="OFM.LUGRA_EJECUCION_OFM">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label>Tipo de Moneda</label>
+                                        <select class="form-control" ng-model="OFM.TIPO_MONEDA">
+                                            <option></option>
+                                            <option value="COP">COP</option>
+                                            <option value="USD">USD</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label>Valor Estimado</label>
+                                        <input type="text" placeholder="" class="form-control" ng-model="OFM.VALOR_ESTIMAO_OFM">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label>Valor Real</label>
+                                        <input type="text" placeholder="" class="form-control" ng-model="OFM.VALOR_REAL_OFM">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label>No de PO</label>
+                                        <input type="text" placeholder="" class="form-control" ng-model="OFM.NO_PO">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="tab-2" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Numero poliza</th>
+                                                    <th>Fecha inicio</th>
+                                                    <th>Fecha de Finalización</th>
+                                                    <th>Aseguradora</th>
+                                                    <th>Valor</th>
+                                                    <th>Tipo de Poliza</th>
+                                                    <th>Valor Asegurador</th>
+                                                    <th></th>
+                                                    <th colspan="3" style="text-align: center">Acciones</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="background-color: transparent">
+                                                    <td></td>
+                                                    <td><input type="text" placeholder="" class="form-control" ng-model="Poliza.COD_POLIZA"></td>
+
+                                                    <td style="width:180px;">
+                                                        <div class="form-group" id="data_2">
+                                                            <div class="input-group date">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </span><input type="text" class="form-control" ng-model="Poliza.FECHA_INI_POL">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td style="width:180px;">
+                                                        <div class="form-group" id="data_3">
+                                                            <div class="input-group date">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </span><input type="text" class="form-control" ng-model="Poliza.FECHA_FINAL_POL">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><input type="text" placeholder="" class="form-control" ng-model="Poliza.ASEGURADORA"></td>
+
+                                                    <td><input type="text" placeholder="" class="form-control" ng-model="Poliza.VALOR_POLIZA"></td>
+
+                                                    <td><input type="text" placeholder="" class="form-control" ng-model="Poliza.TIPO_POLIZA"></td>
+
+                                                    <td><input type="number" placeholder="" class="form-control" ng-model="Poliza.VALOR_ASEGURADO"></td>
+
+                                                    <td>
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-primary" title="guardar" id="guardar" ng-click="CargarPoliza();"><i class="fa fa-save"></i></button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-danger" title="Limpiar" id="limpiar" ng-click="limpiar();"><i class="fa fa-times"></i></button>
+                                                    </td>
+                                                </tr>    
+                                            </tbody>      
+                                        </table>
+                                        <div id="lispoliza">
+
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="tab-3" class="tab-pane">
+                                <div class="panel-body">
+                                    <section id="envio">
+                                        <form id="myForm">
+                                            <input type="file" id="files" name="files[]" onchange="angular.element(this).scope().visualizar()" multiple="multiple">
+                                        </form>
+                                    </section>
+                                    <div id="lista"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <center><button type="button" class="btn btn-primary" ng-click="Add()">Registrar</button></center>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal inmodal" id="modalprocesos" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Listado de procesos competitivos</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered table-hover dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>Proyecto</th>
+                            <th>Proceso competitivo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="gradeX" data-ng-repeat="Proceso in Procesos track by $index" ng-click="Cargar()">
+                            <td>{{Proceso.PROYECTO}}</td>
+                            <td>{{Proceso.DETALLE_PS}}</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+     $(document).ready(function () {
+        $('#data_1 .input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+
+        $('#data_2 .input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+
+        $('#data_3 .input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+    });
+</script>
