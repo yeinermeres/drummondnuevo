@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArchivosProcEntity.cs" />
     <Compile Include="ConfiguracionEntity.cs" />
+    <Compile Include="OfmEntity.cs" />
     <Compile Include="ProcompetitivoEntity.cs" />
     <Compile Include="ProjerManagerEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

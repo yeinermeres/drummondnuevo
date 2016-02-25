@@ -1,5 +1,6 @@
 ﻿using BLL;
 using Dal;
+using Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace WebApplication1.Controllers
         OfertaMercantilBLL of = new OfertaMercantilBLL();
 
         // GET: api/Ofertamercantil
-        public IEnumerable<string> Get()
+        public List<OfmEntity> Get()
         {
-            return new string[] { "value1", "value2" };
+            return of.GetallOfm();
         }
 
         // GET: api/Ofertamercantil/5
@@ -26,9 +27,9 @@ namespace WebApplication1.Controllers
         }
 
         // POST: api/Ofertamercantil
-        public void Post(Oferta_Mercantil ofm, List<Polizas> pl)
+        public void Post(Oferta_Mercantil ofm)
         {
-            of.OFMadd(ofm,pl);
+            of.OFMadd(ofm);
         }
 
         // PUT: api/Ofertamercantil/5

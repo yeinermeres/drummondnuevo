@@ -132,7 +132,12 @@ app.service("ProcompetitivoServices", function ($http) {
     };
 
     this.getprocesoAP = function () {
-        var req = $http.get(uri + '/api/Procompetitivo/Aprovados');
+        var req = $http.get(uri + '/api/Procompetitivo/Aprobados');
+        return req;
+    };
+
+    this.getArchivos = function (id) {
+        var req = $http.get(uri + '/api/Procompetitivo/Archivos/'+id);
         return req;
     };
 
@@ -155,4 +160,21 @@ app.service("ProcompetitivoServices", function ($http) {
         });
         return request;
     };
+});
+
+app.service("OfertamercantilServices", function ($http) {
+
+    var uri = "http://localhost:49372";
+
+    
+    this.post = function (ofm, pl) {
+        var req = $http.post(uri + '/api/Ofertamercantil', ofm);
+        return req;
+    };
+
+    this.getAll= function (id) {
+        var req = $http.get(uri + '/api/Ofertamercantil/');
+        return req;
+    };
+
 });

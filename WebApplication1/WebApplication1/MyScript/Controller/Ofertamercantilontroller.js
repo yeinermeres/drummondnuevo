@@ -1,5 +1,7 @@
-﻿app.controller('Ofertamercantilontroller', function ($scope, ProcompetitivoServices) {
+﻿app.controller('Ofertamercantilontroller', function ($scope, ProcompetitivoServices, OfertamercantilServices) {
 
+    $scope.visibilidadOff = false
+    $scope.visibilidadOn = true
 
     $scope.OFM = {};//Objeto de OFM actual
     $scope.OFMS = []//Listado de Objeto OFM 
@@ -14,6 +16,7 @@
     initialize();
     $scope.CurrentDate = new Date();//Fecha actual
 
+    loadRecord();
     var archivos = [];
 
     function initialize() {
@@ -55,6 +58,17 @@
         promiseGet.then(function (pl) {
             $scope.Procesos = pl.data;
             console.log($scope.Procesos)
+        },
+           function (errorPl) {
+               console.log('Error al cargar los datos almacenados', errorPl);
+           });
+    }
+
+
+    function loadRecord() {
+        var promiseGet = OfertamercantilServices.getAll(); //The Method Call from service
+        promiseGet.then(function (pl) {
+            $scope.OFMS = pl.data;
         },
            function (errorPl) {
                console.log('Error al cargar los datos almacenados', errorPl);
@@ -177,32 +191,57 @@
 
     $scope.Cargar = function ()
     {
+
+        $scope.OFM.FECHA_FINAL_OFM = "";
+        $scope.OFM.VIGENCIA = "";
+        $scope.OFM.DETALLE_PS = "";
+        $scope.OFM.FECHA_INIC_OFM = "";
         $scope.Proceso = this.Proceso;
         $("#modalprocesos").modal('hide');
         localStorage.setItem("ID_COMPETITIVO", $scope.Proceso.ID_COMPETITIVO);
         $scope.OFM.DETALLE_PS = $scope.Proceso.DETALLE_PS;
+        $scope.OFM.FECHA_INIC_OFM = $scope.Proceso.FECHA_INIC_SERVICE;
+
+        ///calculamos fecha de finalizacion
+        var result = new Date($scope.Proceso.FECHA_INIC_SERVICE);
+        result.setDate(result.getDate() + $scope.Proceso.TIEMPO_EJECUCION);
+
+        ///$scope.OFM.FECHA_FINAL_OFM = ('0' + (result.getDate())).slice(-2) + "/" + ('0' + (result.getMonth() + 1)).slice(-2) + "/" + result.getFullYear();
+
+        $scope.OFM.FECHA_FINAL_OFM = ('0' + (result.getMonth() + 1)).slice(-2) + "/"+('0' + (result.getDate())).slice(-2) + "/" + result.getFullYear();
+
+        $scope.OFM.VIGENCIA = $scope.Proceso.TIEMPO_EJECUCION;
 
     }
 
+
     ///Metodo para agregar OFM
     $scope.Add = function () {
+
+        $scope.YearAct = $scope.CurrentDate.getFullYear();
+        $scope.MesAct = ('0' + ($scope.CurrentDate.getMonth() + 1)).slice(-2);
+        $scope.DiaAct = ('0' + $scope.CurrentDate.getDate()).slice(-2);
+
+        
+
         var OFM = {}
         ID_COMPETITIVO = localStorage.getItem("ID_COMPETITIVO");
-        OFM.N_OFM = $scope.OFM.N_OFM;
-        OFM.FECHA_SUSCRIP_OFM = $scope.OFM.FECHA_SUSCRIP_OFM;
+        OFM.N_OFM = $scope.OFM.N_OFM;;
         OFM.FECHA_INIC_OFM = $scope.OFM.FECHA_INIC_OFM;
         OFM.FECHA_FINAL_OFM = $scope.OFM.FECHA_FINAL_OFM;
         OFM.VIGENCIA = $scope.OFM.VIGENCIA;
         OFM.TITULO_OFM = $scope.OFM.TITULO_OFM;
         OFM.CONTRATISTA = $scope.OFM.CONTRATISTA;
         OFM.OBJETO_OFM = $scope.OFM.OBJETO_OFM;
+        OFM.FECHA_SUSCRIP_OFM = $scope.MesAct + "/" + $scope.DiaAct + "/" + $scope.YearAct;
         OFM.LUGRA_EJECUCION_OFM = $scope.OFM.LUGRA_EJECUCION_OFM;
         OFM.TIPO_MONEDA = $scope.OFM.TIPO_MONEDA;
         OFM.VALOR_ESTIMAO_OFM = $scope.OFM.VALOR_ESTIMAO_OFM;
         OFM.VALOR_REAL_OFM = $scope.OFM.VALOR_REAL_OFM;
         OFM.NO_PO = $scope.OFM.NO_PO;
         OFM.PROC_OFM = ID_COMPETITIVO;
-        if (Polizas.length === 0 || archivos.length == 0)
+        console.log(Polizas)
+        if (Polizas.length === 0)
         {
             swal({
                 title: "Mensaje de confirmación",
@@ -216,21 +255,69 @@
                 closeOnCancel: false
             },
             function (isConfirm) {
-                if (isConfirm) {
-                    swal("Mensaje de Notificacion", " se ha realizado el registro de manera exítosa.", "success");
+                if (isConfirm)
+                {
+                    var promiseGet = OfertamercantilServices.post(OFM, Polizas); //The Method Call from service
+
+                    promiseGet.then(function (pl) {
+                        $scope.Procesos = pl.data;
+                        swal("Mensaje de Notificacion", " se ha realizado el registro de manera exítosa.", "success");
+                    },
+                       function (errorPl) {
+                           console.log('Error al cargar los datos almacenados', errorPl);
+                       });
                     
-                } else {
+                }
+                else
+                {
                     swal("Mensaje de Notificacion", "El proceso de registro no se ha confirmado", "error");
                 }
             });
         }
         else
         {
-            console.log("Oferta mercantil :" + JSON.stringify(OFM));
-            console.log("Polizas :" + JSON.stringify(Polizas));
+            var promiseGet = OfertamercantilServices.post(OFM, Polizas); //The Method Call from service
+            promiseGet.then(function (pl) {
+            $scope.Procesos = pl.data;
+             },
+               function (errorPl) {
+                   console.log('Error al cargar los datos almacenados', errorPl);
+               });
         }
+        
+    }
 
+    $scope.configuracion = function () {
+        var OFM = {};
+        $scope.OFM.FECHA_FINAL_OFM = "";
+        $scope.OFM.VIGENCIA = "";
+        $scope.OFM.DETALLE_PS = "";
+        $scope.Proceso = this.Proceso;
+        $("#modalprocesos").modal('hide');
+        localStorage.setItem("ID_COMPETITIVO", $scope.Proceso.ID_COMPETITIVO);
+        $scope.OFM.DETALLE_PS = $scope.Proceso.DETALLE_PS;
+        OFM.FECHA_INIC_OFM = $scope.OFM.FECHA_INIC_OFM;
+        console.log(OFM.FECHA_INIC_OFM)
+
+        ///calculamos fecha de finalizacion
+        var result = new Date(OFM.FECHA_INIC_OFM);
+        result.setDate(result.getDate() + $scope.Proceso.TIEMPO_EJECUCION);
+
+        $scope.OFM.FECHA_FINAL_OFM = ('0' + (result.getMonth() + 1)).slice(-2) + "/" + ('0' + (result.getDate())).slice(-2) + "/" + result.getFullYear();
+
+        $scope.OFM.VIGENCIA = $scope.Proceso.TIEMPO_EJECUCION;
     }
 
 
+    $scope.Mostrar = function () {
+        $scope.visibilidadOff = true
+        $scope.visibilidadOn = false
+
+    }
+
+    $scope.Ocultar = function () {
+        $scope.visibilidadOff = false
+        $scope.visibilidadOn = true
+
+    }
 });

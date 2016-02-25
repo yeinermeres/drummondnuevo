@@ -2,14 +2,19 @@
 
     $scope.visibilidadOff = false
     $scope.visibilidadOn = true
+
     archivos = [];
     $scope.Proceso = {};//Objeto actual
     $scope.Procesos = [];//Listado de Objetos
+
     var file;
     ///Datos proyectos
     $scope.Proyec = {};//Objeto actual
     $scope.Proyes = [];//Listado de Objetos
     loadRecord();
+
+    $scope.archi = {};
+    $scope.archivos = [];
 
     $scope.CurrentDate = new Date();//Fecha actual
     inicialize();
@@ -151,7 +156,78 @@
         
     };
 
+    $scope.getArchivo = function (id) {
+        var promiseGet = ProcompetitivoServices.getArchivos(id); //The Method Call from service
+        promiseGet.then(function (pl) {
+            $scope.archivos = pl.data;
+            console.log($scope.archivos);
+            rutas($scope.archivos)
+        },
+           function (errorPl) {
+               console.log('Error al cargar los datos almacenados', errorPl);
+           });
+    }
+
+
+    var rutas = function (dto) {
+        document.getElementById("rutas").innerHTML = "";
+        var rt = "";
+        if (dto.length === 0)
+         {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": false,
+                "preventDuplicates": false,
+                "positionClass": "toast-bottom-full-width",
+                "onclick": null,
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "7000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            toastr.warning("No existen documentos adjuntos para este proceso competitivo", "Notificaciones");
+        }
+        else
+        {
+           
+            var item = "<table class='table table-striped'>"
+            item += "<thead>";
+            item += "<tr>";
+            item += "<th>Docuementos</th>";
+            item += "<th></th>";
+            item += "</tr>";
+            item += "</thead>";
+            for (i = 0; i < dto.length; i++) {
+                rt  = dto[i].RUTA;
+                var res = rt.substring(70,90);
+                item += "<tbody>";
+                item += "<tr class='gradeX'>";
+                item += '<td>' + res + '</td>';
+                item += "<td>";
+                item += "<a href='javasrcritp:;' title='Remover archivo' onclick='ver(" + dto[i].RUTA + ");'><i class='fa fa-eye' style='font-size:20px;color:#1A7BB9;margin-left:20px'></i></a>";
+                item += "</td>";
+                item += "</tr>";
+                item += "</tbody>";
+            }
+            item += "</table>";
+            $("#rutas").append(item);
+            $("#modalRutas").modal("show");
+        }
+       
+    }
+
+    ver = function (rt) {
+        alert(rt);
+    }
     var calcularFI = function (dias) {
+        $scope.Proceso.FECHA_INICO = "";
+        $scope.Proceso.FECHA_INIC_SERVICE = "";
+
         $scope.YearAct = $scope.CurrentDate.getFullYear();
         $scope.MesAct = ('0' + ($scope.CurrentDate.getMonth()+1)).slice(-2);
         $scope.DiaAct = ('0' + $scope.CurrentDate.getDate()).slice(-2);
@@ -166,7 +242,7 @@
             console.log(('0' + (result.getMonth() + 1)));
             console.log(result.getFullYear());*/
             
-            $scope.Proceso.FECHA_INIC_SERVICE = ('0' + (result.getDate())).slice(-2) + "/" + ('0' + (result.getMonth() + 1)).slice(-2) + "/" + result.getFullYear();
+            $scope.Proceso.FECHA_INIC_SERVICE =('0' + (result.getMonth() + 1)).slice(-2) +"/"+ ('0' + (result.getDate())).slice(-2)  +"/" + result.getFullYear();
             //alert($scope.Proceso.FECHA_INIC_SERVICE);
     }
 

@@ -176,5 +176,27 @@ namespace BLL
             }
 
         }
+
+        /// <summary>
+        /// Metodo retorna una lista de archivo asociado
+        /// a un proceso competitivo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<ArchivosProcEntity> Getarchivos(int id) {
+            using (var contex = new ModelContex())
+            {
+                var dto = contex.Archivo_Ruta.Where(p => p.PROCESO_ARCHIVO == id).ToList();
+                List<ArchivosProcEntity> lisarc = new List<ArchivosProcEntity>();
+                foreach (var item in dto)
+                {
+                    ArchivosProcEntity archivo = new ArchivosProcEntity();
+                    archivo.RUTA = item.RUTA;
+                    lisarc.Add(archivo);
+                }
+                return lisarc;
+            }
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BLL;
 using Dal;
+using Entity;
 using Entity.VISTAS;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,20 @@ namespace WebApplication1.Controllers
         // GET: api/Procompetitivo
         public List<Vproyec_competitivo> Get()
         {
+            return proc.VProyec_procompetitivos();
+        }
+
+        [HttpGet]
+        [Route("~/api/Procompetitivo/Aprobados")]
+        public List<Vproyec_competitivo> GetAprobados_Proc() {
             return proc.V_procompetitivos();
         }
 
         [HttpGet]
-        [Route("~/api/Procompetitivo/Aprovados")]
-        public List<Vproyec_competitivo> GetAprovador_Proc() {
-            return proc.V_procompetitivos();
+        [Route("~/api/Procompetitivo/Archivos/{id}")]
+        public List<ArchivosProcEntity> GetArchivos(int id)
+        {
+            return proc.Getarchivos(id);
         }
 
         // GET: api/Procompetitivo/5
