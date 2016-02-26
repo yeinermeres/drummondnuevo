@@ -55,7 +55,18 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h2>Gestion Oferta mercantil </h2>
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2>Gestion oferta mercantil</h2>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Buscador" class="input-sm form-control" ng-model="filtro"> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="hr-line-dashed"></div>
                     </div>
                     <div class="tabs-container">
@@ -255,7 +266,18 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h2>Gestion Oferta mercantil </h2>
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2>Gestion oferta mercantil</h2>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Buscador" class="input-sm form-control" ng-model="filtro"> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="hr-line-dashed"></div>
                     </div>
                     <div class="tabs-container">
@@ -270,17 +292,26 @@
                                         <th>Titulo</th>
                                         <th>Lugar de ejecucion</th>
                                         <th>Valor estimado</th>
+                                        <th>Detalle</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr class="gradeX" data-ng-repeat="OFM in OFMS track by $index">
                                         <th></th>
-                                        <th>{{OFM.N_OFM}}</th>
-                                        <th>{{OFM.FECHA_SUSCRIP_OFM}}</th>
-                                        <th>{{OFM.FECHA_INIC_OFM}}</th>
-                                        <th>{{OFM.TITULO_OFM}}</th>
-                                        <th>{{OFM.LUGRA_EJECUCION_OFM}}</th>
-                                        <th>{{OFM.VALOR_ESTIMAO_OFM}}</th>
+                                        <td>{{OFM.N_OFM}}</td>
+                                        <td>{{OFM.FECHA_SUSCRIP_OFM}}</td>
+                                        <td>{{OFM.FECHA_INIC_OFM}}</td>
+                                        <td>{{OFM.TITULO_OFM}}</td>
+                                        <td>{{OFM.LUGRA_EJECUCION_OFM}}</td>
+                                        <td>{{OFM.VALOR_ESTIMAO_OFM}}</td>
+                                        <td class="center">
+                                            <a ng-href="" title="Ver detalle" data-toggle="modal" data-target="#modalDescripcion" ng-click="detalle()"><i class="fa fa-eye" style="font-size:20px;color:#1A7BB9;"></i></a>
+                                        </td>
+                                        <td style="text-align: center">
+                                            <a href="javasrcritp:;" title="Editar Proyecto" ng-click="edit(Proyec)"><i class="fa fa-edit" style="font-size:20px;color:#1A7BB9;padding-right:5px"></i></a>
+                                            <a href="javasrcritp:;" title="Anular Proyectos" ng-click="removePR(Proyec)"><i class="fa fa-trash" style="font-size:20px;color:#ED5565;"></i></a>
+                                        </td>
                                     </tr>
 
                                 </tbody>

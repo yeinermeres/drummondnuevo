@@ -19,6 +19,17 @@
     loadRecord();
     var archivos = [];
 
+    $scope.Limpiar = function () {
+        $scope.Poliza.NO_POLIZA = "";
+        $scope.Poliza.FECHA_INI_POL = "";
+        $scope.Poliza.COD_POLIZA = "";
+        $scope.Poliza.FECHA_FINAL_POL = "";
+        $scope.Poliza.ASEGURADORA = "";
+        $scope.Poliza.VALOR_POLIZA = "";
+        $scope.Poliza.TIPO_POLIZA = "";
+        $scope.Poliza.VALOR_ASEGURADO = "";
+    }
+
     function initialize() {
         $scope.Proceso = {};
         loadRecordProcoesos();
