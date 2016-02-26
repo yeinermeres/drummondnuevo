@@ -196,6 +196,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AspiranteProcesoController.cs" />
+    <Compile Include="Controllers\AspirantesController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -506,6 +508,7 @@
     <Content Include="js\plugins\wow\wow.min.js" />
     <Content Include="js\sweetalert-dev.js" />
     <Content Include="js\sweetalert.min.js" />
+    <Content Include="MyScript\Controller\AspiranteController.js" />
     <Content Include="MyScript\Controller\ConfiguracionController.js" />
     <Content Include="MyScript\Controller\ordencompraController.js" />
     <Content Include="MyScript\Controller\ordenController.js" />

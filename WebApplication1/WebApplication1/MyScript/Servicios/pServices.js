@@ -146,6 +146,10 @@ app.service("ProcompetitivoServices", function ($http) {
         return req;
     };
 
+    this.getAllAspirantes = function () {
+        var req = $http.get(uri + '/api/aspirantes');
+        return req;
+    };
 
     this.post = function (proceso) {
         var req = $http.post(uri + '/api/Procompetitivo', proceso);
@@ -159,6 +163,53 @@ app.service("ProcompetitivoServices", function ($http) {
             data: id
         });
         return request;
+    };
+
+    this.get = function (id) {
+        var req = $http.get(uri + '/api/Procompetitivo/' + id);
+        return req;
+    };
+
+    this.relacion = function (relacion) {
+        var req = $http.post(uri + '/api/aspiranteproceso', relacion);
+        return req;
+    };
+
+
+});
+
+app.service("AspiranteServices", function ($http) {
+
+    var uri = "http://localhost:49372";
+
+
+    this.getAllproyectos = function () {
+        var req = $http.get(uri + '/api/aspirantes');
+        return req;
+    };
+
+    this.getAll = function () {
+        var req = $http.get(uri + '/api/aspirantes');
+        return req;
+    };
+
+    this.post = function (aspirantes) {
+        var req = $http.post(uri + '/api/aspirantes', aspirantes);
+        return req;
+    };
+
+    this.delete = function (id) {
+        var request = $http({
+            method: "delete",
+            url: uri + '/api/aspirantes/' + id,
+            data: id
+        });
+        return request;
+    };
+
+    this.relacion = function (relacion) {
+        var req = $http.post(uri + '/api/aspiranteproceso', relacion);
+        return req;
     };
 });
 

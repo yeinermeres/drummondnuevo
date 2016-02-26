@@ -121,3 +121,21 @@ C:\Users\TECNOPARQUE\Desktop\Drummond\WebApplication1\Dal\obj\Debug\Dal.csprojRe
 C:\Users\TECNOPARQUE\Desktop\Drummond\WebApplication1\Dal\obj\Debug\Dal.Migrations.polizacod.resources
 C:\Users\TECNOPARQUE\Desktop\Drummond\WebApplication1\Dal\obj\Debug\Dal.Migrations.addestadoPRC.resources
 C:\Users\TECNOPARQUE\Desktop\Drummond\WebApplication1\Dal\obj\Debug\Dal.Migrations.FROFMPROC.resources
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\bin\Debug\Dal.dll.config
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\bin\Debug\Dal.dll
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\bin\Debug\Dal.pdb
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\bin\Debug\EntityFramework.dll
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\bin\Debug\EntityFramework.SqlServer.dll
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\bin\Debug\EntityFramework.xml
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\bin\Debug\EntityFramework.SqlServer.xml
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.csprojResolveAssemblyReference.cache
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.Migrations.L.resources
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.Migrations.ofm.resources
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.Migrations.Polizas.resources
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.Migrations.polizacod.resources
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.Migrations.addestadoPRC.resources
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.Migrations.FROFMPROC.resources
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.csproj.GenerateResource.Cache
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.dll
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.pdb
+F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.Migrations.aspirantes.resources

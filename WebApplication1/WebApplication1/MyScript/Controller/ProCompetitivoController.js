@@ -1,7 +1,12 @@
-﻿app.controller('ProCompetitivoController', function ($scope, ProcompetitivoServices) {
+﻿app.controller('ProCompetitivoController', function ($scope, ProcompetitivoServices, $rootScope) {
 
     $scope.visibilidadOff = false
     $scope.visibilidadOn = true
+
+
+    $rootScope.ProCompetitivo;
+    $rootScope.AspProceso;
+    $rootScope.AspirantesPros = [];
 
     archivos = [];
     $scope.Proceso = {};//Objeto actual
@@ -11,19 +16,28 @@
     ///Datos proyectos
     $scope.Proyec = {};//Objeto actual
     $scope.Proyes = [];//Listado de Objetos
-    loadRecord();
+
+    $scope.Aspirante = {}; //Objeto Actual
+    $scope.Aspirantes = [];//Listado de Objetos
 
     $scope.archi = {};
     $scope.archivos = [];
 
-    $scope.CurrentDate = new Date();//Fecha actual
+    loadRecordProyectos();
+    loadRecords();
+    loadRecordAspirantes();
     inicialize();
 
-    loadRecordProyectos();
+    $scope.CurrentDate = new Date();//Fecha actual
+    
+
+    
 
     function inicialize() {
         $scope.Proyec = {};
         $scope.Proceso = {};
+        $scope.Aspirante = {};
+
         $scope.Proyec.PROYECTO = "";
         $scope.Proyec.COMP_ADQUISICION = "";
         
@@ -54,7 +68,7 @@
            });
     }
 
-    function loadRecord() {
+    function loadRecords() {
         var promiseGet = ProcompetitivoServices.getAll(); //The Method Call from service
         promiseGet.then(function (pl) {
             $scope.Procesos = pl.data;
@@ -65,16 +79,113 @@
            });
     }
 
+    function loadRecordAspirantes() {
+        var promiseGet = ProcompetitivoServices.getAllAspirantes(); //The Method Call from service
+        promiseGet.then(function (pl) {
+            $scope.Aspirantes = pl.data;
+        },
+        function (errorPl) {
+            console.log('Error al cargar los datos almacenados', errorPl);
+        });
+    }
+
+    function loadRecordsAspirantes(id) {
+        var promiseGet = ProcompetitivoServices.get(id); //The Method Call from service
+        promiseGet.then(function (pl) {
+            $rootScope.AspirantesPros = pl.data;
+            console.log($rootScope.AspirantesPros)
+        },
+        function (errorPl) {
+            console.log('Error al cargar los datos almacenados', errorPl);
+        });
+    }
+
     $scope.LoadModal = function () {
         $('#modalproyectos').modal('show')
 
     }
 
-    $scope.Mostrar = function () {
-        $scope.visibilidadOff = true
-        $scope.visibilidadOn = false
+    $scope.LoadAspirantes = function () {
+        $('#modalAspirantes').modal('show');
 
+        $scope.Proceso = this.Proceso;
+        localStorage.setItem('PROCESO', $scope.Proceso.ID_COMPETITIVO);
+
+        console.log("SELECCION PROCESO : " + $scope.Proceso.ID_COMPETITIVO)
     }
+
+    $scope.CerrarModal = function () {
+        $('#modalAspirantes').modal('hide')
+    }
+
+    
+
+    $scope.CargarAsp = function () {
+        $scope.Aspirante = this.Aspirante;
+        localStorage.setItem('ASPIRANTE', $scope.Aspirante.ASPIRANTE_ID);
+
+        console.log("SELECCION ASP : " + $scope.Aspirante.ASPIRANTE_ID)
+        swal({
+            title: "Mensaje de confirmación",
+            text: "¿Esta seguro que desea agregar este aspirante?" +
+            "\n" + $scope.Aspirante.NOM_RAZONSOCIAL,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    var AspProceso = {};
+                    var DOCUMENTO_ASP = localStorage.getItem("ASPIRANTE");
+                    var DOCUMENTO_PRO = localStorage.getItem("PROCESO");
+
+                    AspProceso.ID_ASPIRANTE = DOCUMENTO_ASP;
+                    AspProceso.ID_PROCESO = DOCUMENTO_PRO;
+
+                    console.log("CONFIRMAR ID_ASPIRANTE " + DOCUMENTO_ASP);
+                    console.log("CONFIRMAR ID_COMPETITIVO " + DOCUMENTO_PRO);
+
+                    var result = ProcompetitivoServices.relacion(AspProceso);
+                    result.then(function () {
+                        setTimeout(function () {
+                            toastr.options = {
+                                "closeButton": true,
+                                "debug": false,
+                                "progressBar": false,
+                                "preventDuplicates": false,
+                                "positionClass": "toast-bottom-full-width",
+                                "onclick": null,
+                                "showDuration": "400",
+                                "hideDuration": "1000",
+                                "timeOut": "7000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            };
+                        }, 1100);
+                        loadRecordProcesos();
+                        localStorage.removeItem("ASPIRANTE")
+                        localStorage.removeItem("PROCESO")
+
+                    },
+                    function (errorpl) {
+                        console.log(errorpl)
+                    });
+
+                    swal("Mensaje de Notificacion", "El Proceso fue realizado de manera exitosa.", "success");
+                } else {
+                    swal("Mensaje de Notificacion", "El Proceso no ha sido confirmado", "error");
+                }
+            });
+
+        $('#modalAspirantes').modal('hide');
+    };
     
     $scope.Cargar = function () {
         $scope.Proyec = this.Proyec;
@@ -103,11 +214,7 @@
         $('#modalproyectos').modal('hide')
     }
 
-    $scope.Ocultar = function () {
-        $scope.visibilidadOff = false
-        $scope.visibilidadOn = true
-
-    }
+    
 
     $scope.Add = function () {
         var Proceso= {}
@@ -246,6 +353,17 @@
             //alert($scope.Proceso.FECHA_INIC_SERVICE);
     }
 
+    $scope.Mostrar = function () {
+        $scope.visibilidadOff = true
+        $scope.visibilidadOn = false
+    }
+
+    $scope.Ocultar = function () {
+        $scope.visibilidadOff = false
+        $scope.visibilidadOn = true
+
+    }
+
     $scope.visualizar = function () {
         document.getElementById("lista").innerHTML = "";
         var files = document.getElementById('files').files;
@@ -307,5 +425,11 @@
                 }
             }
         });
+    }
+
+    $scope.detalle = function () {
+        $rootScope.ProCompetitivo = this.Proceso;
+        loadRecordsAspirantes($rootScope.ProCompetitivo.ID_COMPETITIVO);
+        console.log("id c" + $rootScope.ProCompetitivo.ID_COMPETITIVO)
     }
 });

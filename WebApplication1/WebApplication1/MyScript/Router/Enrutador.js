@@ -25,10 +25,11 @@ var app;
                     controller: 'ProCompetitivoController'
                 })
                 .when('/DetalleCompetitivo', {
-                    templateUrl: 'Proyectos/ProcesoCompetitivo/Detalle_Procompetitivo.html',
+                    templateUrl: 'Proyectos/ProcesoCompetitivo/Detalle_Procompetitivo.html',                    
                 })
                 .when('/Proyectos/RegistroAspirante', {
                     templateUrl: 'Proyectos/ProcesoCompetitivo/RegistroAspirante.html',
+                    controller: 'AspiranteController'
                 })
                 .when('/OFM/REGOFM', {
                     templateUrl: 'OFM/GestionOFM.html',

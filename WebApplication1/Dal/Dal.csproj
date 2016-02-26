@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Archivo_Ruta.cs" />
+    <Compile Include="AspiranteProceso.cs" />
+    <Compile Include="Aspirantes.cs" />
     <Compile Include="Configuraciones.cs" />
     <Compile Include="Migrations\201602230247383_L.cs" />
     <Compile Include="Migrations\201602230247383_L.Designer.cs">
@@ -75,6 +77,10 @@
     <Compile Include="Migrations\201602241546099_FR-OFM-PROC.cs" />
     <Compile Include="Migrations\201602241546099_FR-OFM-PROC.Designer.cs">
       <DependentUpon>201602241546099_FR-OFM-PROC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602261339087_aspirantes.cs" />
+    <Compile Include="Migrations\201602261339087_aspirantes.Designer.cs">
+      <DependentUpon>201602261339087_aspirantes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Oferta_Mercantil.cs" />
@@ -111,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602241546099_FR-OFM-PROC.resx">
       <DependentUpon>201602241546099_FR-OFM-PROC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602261339087_aspirantes.resx">
+      <DependentUpon>201602261339087_aspirantes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

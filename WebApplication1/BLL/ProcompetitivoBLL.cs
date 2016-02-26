@@ -198,5 +198,34 @@ namespace BLL
             }
         }
 
+
+        public List<AspirantesEntity> GetAspirantes(int idProceso)
+        {
+            using (var contex = new ModelContex())
+            {
+                var query = contex.Aspirantes.Where(t => t.AspiranteProceso.Where(tt => tt.ID_PROCESO == idProceso).Count() > 0).ToList();
+
+                List<AspirantesEntity> resul = new List<AspirantesEntity>();
+                if (query != null)
+                {
+                    foreach (var item in query)
+                    {
+                        AspirantesEntity aspirante = new AspirantesEntity();
+                        aspirante.ASPIRANTE_ID = item.ASPIRANTE_ID;
+                        aspirante.NIT_CEDULA = item.NIT_CEDULA;
+                        aspirante.NOM_RAZONSOCIAL = item.NOM_RAZONSOCIAL;
+                        aspirante.CORREO = item.CORREO;
+                        aspirante.DIRECCION = item.DIRECCION;
+                        aspirante.CIUDAD = item.CIUDAD;
+                        aspirante.DEPARTAMENTO = item.DEPARTAMENTO;
+                        aspirante.TELEFONO = item.TELEFONO;
+                        resul.Add(aspirante);
+                    }
+
+                    return resul;
+                }
+                return resul;
+            }
+        }
     }
 }

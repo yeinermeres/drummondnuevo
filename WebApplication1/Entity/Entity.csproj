@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchivosProcEntity.cs" />
+    <Compile Include="AspiranteProcesoEntity.cs" />
+    <Compile Include="AspirantesEntity.cs" />
     <Compile Include="ConfiguracionEntity.cs" />
     <Compile Include="OfmEntity.cs" />
     <Compile Include="ProcompetitivoEntity.cs" />
