@@ -59,13 +59,7 @@
                             <div class="col-lg-9">
                                 <h2>Gestion oferta mercantil</h2>
                             </div>
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                                    <input type="text" placeholder="Buscador" class="input-sm form-control" ng-model="filtro"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
-                                    </span>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="hr-line-dashed"></div>
                     </div>
@@ -126,7 +120,7 @@
                                     </div>
                                     <div class="form-group col-lg-3">
                                         <label>Proveedor/Contratista</label>
-                                        <input type="text" placeholder="" class="form-control" ng-model="OFM.CONTRATISTA">
+                                        <input type="text" placeholder="" class="form-control" ng-model="OFM.CONTRATISTA" readonly="">
                                     </div>
 
                                     <div class="form-group col-lg-9">
@@ -337,23 +331,23 @@
                 <h4 class="modal-title">Listado de procesos competitivos</h4>
             </div>
             <div class="modal-body">
-                <table class="table table-stripe">
-                    <thead>
-                        <tr>
-                            <th>Proyecto</th>
-                            <th>Proceso competitivo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="gradeX" data-ng-repeat="Proceso in Procesos track by $index" ng-click="Cargar()">
-                            <td>{{Proceso.PROYECTO}}</td>
-                            <td>{{Proceso.DETALLE_PS}}</td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
+                <div ng-show="ON">
+                    <ul class="nav metismenu" id="side-menu" data-ng-repeat="Proceso in Procesos track by $index" ng-click="detalle()">
+                        <li>
+                            <a><i class="fa fa-folder"></i> <span class="nav-label">{{Proceso.DETALLE_PS}}</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div ng-show="OFF">
+                    <ul class="nav metismenu" id="side-menu" data-ng-repeat="AspirantesPro in AspirantesPros">
+                        <li ng-click="Cargar()">
+                            <a><i class="fa fa-user"></i> <span class="nav-label">{{AspirantesPro.NOM_RAZONSOCIAL}}</span></a>
+                        </li>
+                    </ul>
+                    <center><button class="btn btn-default " type="button" ng-click="Atras()"><i class="fa fa-reply"></i> Atras</button></center>
+                </div>
             </div>
+            
             <div class="modal-footer">
                 <button type="submit" class="btn btn-white" data-dismiss="modal">Cerrar</button>
             </div>
@@ -361,38 +355,85 @@
     </div>
 </div>
 
-<div class="contenedorb">
-    <button class="botonF1" ng-click="Mostrar()" ng-show="visibilidadOn">
-        <i class="fa fa-plus" style="font-size:36px;"></i>
-    </button>
-    <button class="botonF1" ng-click="Ocultar()" ng-show="visibilidadOff">
-        <i class="fa fa-mail-reply " style="font-size:36px;"></i>
-    </button>
-</div>
-<script>
-     $(document).ready(function () {
-        $('#data_1 .input-group.date').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
+
+
+
+
+
+    <div class="contenedorb">
+        <button class="botonF1" ng-click="Mostrar()" ng-show="visibilidadOn">
+            <i class="fa fa-plus" style="font-size:36px;"></i>
+        </button>
+        <button class="botonF1" ng-click="Ocultar()" ng-show="visibilidadOff">
+            <i class="fa fa-mail-reply " style="font-size:36px;"></i>
+        </button>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+            $('#data_2 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+            $('#data_3 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+            var updateOutput = function (e) {
+                var list = e.length ? e : $(e.target),
+                        output = list.data('output');
+                if (window.JSON) {
+
+                } else {
+                    output.val('JSON browser support required for this demo.');
+                }
+            };
+            // activate Nestable for list 1
+            $('#nestable').nestable({
+                group: 1
+            }).on('change', updateOutput);
+
+            // activate Nestable for list 2
+            $('#nestable2').nestable({
+                group: 1
+            }).on('change', updateOutput);
+
+            // output initial serialised data
+            updateOutput($('#nestable').data('output', $('#nestable-output')));
+            updateOutput($('#nestable2').data('output', $('#nestable2-output')));
+
+            $('#nestable-menu').on('click', function (e) {
+                var target = $(e.target),
+                        action = target.data('action');
+                if (action === 'expand-all') {
+                    $('.dd').nestable('expandAll');
+                }
+                if (action === 'collapse-all') {
+                    $('.dd').nestable('collapseAll');
+                }
+            });
+
+
         });
 
-        $('#data_2 .input-group.date').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
-        });
 
-        $('#data_3 .input-group.date').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
-        });
-    });
-</script>
+
+
+    </script>

@@ -54,3 +54,8 @@ F:\drummondnuevo\WebApplication1\Entity\obj\Debug\Entity.dll
 F:\drummondnuevo\WebApplication1\Entity\obj\Debug\Entity.pdb
 F:\drummondnuevo\WebApplication1\Entity\bin\Debug\Entity.dll
 F:\drummondnuevo\WebApplication1\Entity\bin\Debug\Entity.pdb
+C:\Users\tecnoparque\Documents\GitHub\drummondnuevo\WebApplication1\Entity\bin\Debug\Entity.dll
+C:\Users\tecnoparque\Documents\GitHub\drummondnuevo\WebApplication1\Entity\bin\Debug\Entity.pdb
+C:\Users\tecnoparque\Documents\GitHub\drummondnuevo\WebApplication1\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+C:\Users\tecnoparque\Documents\GitHub\drummondnuevo\WebApplication1\Entity\obj\Debug\Entity.dll
+C:\Users\tecnoparque\Documents\GitHub\drummondnuevo\WebApplication1\Entity\obj\Debug\Entity.pdb

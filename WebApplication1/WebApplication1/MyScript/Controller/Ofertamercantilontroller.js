@@ -1,11 +1,18 @@
-﻿app.controller('Ofertamercantilontroller', function ($scope, ProcompetitivoServices, OfertamercantilServices) {
+﻿app.controller('Ofertamercantilontroller', function ($scope, ProcompetitivoServices, OfertamercantilServices,$rootScope) {
 
     $scope.visibilidadOff = false
     $scope.visibilidadOn = true
 
+    $scope.ON = true
+    $scope.OFF = false
+
     $scope.OFM = {};//Objeto de OFM actual
     $scope.OFMS = []//Listado de Objeto OFM 
 
+
+    $rootScope.ProCompetitivo;
+    $rootScope.AspProceso;
+    $rootScope.AspirantesPros = [];
 
     $scope.Proceso = {};//Objeto actual
     $scope.Procesos = [];//Listado de Objetos
@@ -75,7 +82,6 @@
            });
     }
 
-
     function loadRecord() {
         var promiseGet = OfertamercantilServices.getAll(); //The Method Call from service
         promiseGet.then(function (pl) {
@@ -84,6 +90,18 @@
            function (errorPl) {
                console.log('Error al cargar los datos almacenados', errorPl);
            });
+    }
+
+    function loadRecordsAspirantes(id) {
+        $scope.AspirantesPros = "";
+        var promiseGet = ProcompetitivoServices.get(id); //The Method Call from service
+        promiseGet.then(function (pl) {
+            $scope.AspirantesPros = pl.data;
+            console.log("aspir "+$scope.AspirantesPros)
+        },
+        function (errorPl) {
+            console.log('Error al cargar los datos almacenados', errorPl);
+        });
     }
 
     ///Cargar poliza al array 
@@ -202,7 +220,8 @@
 
     $scope.Cargar = function ()
     {
-
+        $scope.AspirantesPro = this.AspirantesPro;
+        $scope.OFM.CONTRATISTA = $scope.AspirantesPro.NOM_RAZONSOCIAL;
         $scope.OFM.FECHA_FINAL_OFM = "";
         $scope.OFM.VIGENCIA = "";
         $scope.OFM.DETALLE_PS = "";
@@ -212,7 +231,6 @@
         localStorage.setItem("ID_COMPETITIVO", $scope.Proceso.ID_COMPETITIVO);
         $scope.OFM.DETALLE_PS = $scope.Proceso.DETALLE_PS;
         $scope.OFM.FECHA_INIC_OFM = $scope.Proceso.FECHA_INIC_SERVICE;
-
         ///calculamos fecha de finalizacion
         var result = new Date($scope.Proceso.FECHA_INIC_SERVICE);
         result.setDate(result.getDate() + $scope.Proceso.TIEMPO_EJECUCION);
@@ -224,7 +242,6 @@
         $scope.OFM.VIGENCIA = $scope.Proceso.TIEMPO_EJECUCION;
 
     }
-
 
     ///Metodo para agregar OFM
     $scope.Add = function () {
@@ -319,6 +336,14 @@
         $scope.OFM.VIGENCIA = $scope.Proceso.TIEMPO_EJECUCION;
     }
 
+    $scope.detalle = function () {
+        $scope.Proceso = this.Proceso;
+        loadRecordsAspirantes($scope.Proceso.ID_COMPETITIVO);
+
+        console.log("id c " + $scope.Proceso.ID_COMPETITIVO);
+        $scope.ON = false
+        $scope.OFF = true
+    }
 
     $scope.Mostrar = function () {
         $scope.visibilidadOff = true
@@ -329,6 +354,12 @@
     $scope.Ocultar = function () {
         $scope.visibilidadOff = false
         $scope.visibilidadOn = true
+
+    }
+
+    $scope.Atras = function () {
+        $scope.ON = true
+        $scope.OFF = false
 
     }
 });

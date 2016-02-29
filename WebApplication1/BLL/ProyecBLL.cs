@@ -111,7 +111,7 @@ namespace BLL
             using (var contex = new ModelContex())
             {
                 var result = from proyec in contex.Proyecto
-                             where proyec.ESTADO_PROYEC != "A"
+                             //where proyec.ESTADO_PROYEC != "A"
                              join Prom in contex.Pro_Manager on proyec.PROYEC_MANAGER equals Prom.ID_PROMANAGER
                              select new
                              {
