@@ -13,5 +13,7 @@ namespace Dal
         public int ID_RUTA { get; set; }
         public string RUTA { get; set; }
         public int PROCESO_ARCHIVO { get; set; }
+
+        public virtual Proceso_Competitivo ruta_proceso { get; set; }
     }
 }

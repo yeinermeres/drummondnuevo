@@ -10,7 +10,7 @@ namespace BLL
 {
     public class AspiranteProcesoBLL
     {
-        public void AddAspiranteProceso(AspiranteProceso ap)
+        public void AddAspiranteProceso(Aspirante_Proceso ap)
         {
             using (var contex = new ModelContex())
             {
@@ -19,22 +19,23 @@ namespace BLL
                 {
                     var CTX = contex.Aspirantes.Max(p=> p.ASPIRANTE_ID);
                     ap.ID_ASPIRANTE = CTX;
-                    contex.AspiranteProceso.Add(ap);
+                    contex.Aspirantes_proceso.Add(ap);
                     contex.SaveChanges();
                 }
                 else
                 {
-                  contex.AspiranteProceso.Add(ap);
+                  contex.Aspirantes_proceso.Add(ap);
                   contex.SaveChanges();
                 }
                 
             }
         }
+
         public List<AspiranteProcesoEntity> GetAll()
         {
             using (var contex = new ModelContex())
             {
-                var dto = contex.AspiranteProceso.ToList();
+                var dto = contex.Aspirantes_proceso.ToList();
                 List<AspiranteProcesoEntity> LisAspPro = new List<AspiranteProcesoEntity>();
 
                 if (dto != null)
@@ -53,5 +54,6 @@ namespace BLL
                 return LisAspPro;
             }
         }
+       
     }
 }

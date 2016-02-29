@@ -521,7 +521,6 @@
     <Content Include="Notificaciones\Notificaciones.html" />
     <Content Include="OFM\GestionOFM.html" />
     <Content Include="OFM\OP\Ordencompra.html" />
-    <Content Include="OFM\Ordenes.html" />
     <Content Include="Proyectos\ProcesoCompetitivo\Detalle_Procompetitivo.html" />
     <Content Include="Proyectos\ProcesoCompetitivo\ProCompetitivo.html" />
     <Content Include="Proyectos\ProcesoCompetitivo\RegistroAspirante.html" />

@@ -49,10 +49,10 @@ namespace BLL
                                  FECHA_INIC_SERVICE = proce.FECHA_INIC_SERVICE,
                                  DETALLE_PS = proce.DETALLE_PS,
                                  CANTIDAD = proce.CANTIDAD,
-                                 VALOR_ESTIMADO = proce.VALOR_ESTIMADO,
-                                 PROYECTO = proye.PROYECTO,
                                  LUGAR_EJECUCION = proce.LUGAR_EJECUCION,
+                                 COMP_ADQUISICION=proce.COMP_ADQUISICION,
                                  ESTADO_PROC = proce.ESTADO_PROC,
+                                 PROYECTO = proye.PROYECTO,
                              };
                 if (result != null)
                 {
@@ -68,8 +68,8 @@ namespace BLL
                         proceso.DETALLE_PS = item.DETALLE_PS;
                         proceso.CANTIDAD = item.CANTIDAD;
                         proceso.LUGAR_EJECUCION = item.LUGAR_EJECUCION;
-                        proceso.VALOR_ESTIMADO = item.VALOR_ESTIMADO;
                         proceso.PROYECTO = item.PROYECTO;
+                        proceso.COMP_ADQUISICION = item.COMP_ADQUISICION;
                         proceso.ESTADO_PROC = item.ESTADO_PROC;
                         proc.Add(proceso);
 
@@ -108,9 +108,9 @@ namespace BLL
                         proceso.CANTIDAD = item.CANTIDAD;
                         proceso.UNIDAD = item.UNIDAD;
                         proceso.LUGAR_EJECUCION = item.LUGAR_EJECUCION;
-                        proceso.VALOR_ESTIMADO = item.VALOR_ESTIMADO;
                         proceso.VALOR_TOTAL = item.VALOR_TOTAL;
                         proceso.ESTADO_PROC = item.ESTADO_PROC;
+                        proceso.COMP_ADQUISICION = item.COMP_ADQUISICION;
                         proc.Add(proceso);
 
                     }
@@ -132,7 +132,7 @@ namespace BLL
             {
                 List<Vproyec_competitivo> proc = new List<Vproyec_competitivo>();
 
-                var result = from proce in contex.Proceso_Competitivo where proce.ESTADO_PROC =="AP"
+                var result = from proce in contex.Proceso_Competitivo
                              join  proye in contex.Proyecto on proce.PROYECTO_COMPETITIVO equals proye.PROYEC_ID
                              select new
                              {
@@ -144,7 +144,6 @@ namespace BLL
                                  FECHA_INIC_SERVICE = proce.FECHA_INIC_SERVICE,
                                  DETALLE_PS = proce.DETALLE_PS,
                                  CANTIDAD = proce.CANTIDAD,
-                                 VALOR_ESTIMADO = proce.VALOR_ESTIMADO,
                                  PROYECTO = proye.PROYECTO,
                                  LUGAR_EJECUCION = proce.LUGAR_EJECUCION,
                                  ESTADO_PROC = proce.ESTADO_PROC,
@@ -163,7 +162,6 @@ namespace BLL
                         proceso.DETALLE_PS = item.DETALLE_PS;
                         proceso.CANTIDAD = item.CANTIDAD;
                         proceso.LUGAR_EJECUCION = item.LUGAR_EJECUCION;
-                        proceso.VALOR_ESTIMADO = item.VALOR_ESTIMADO;
                         proceso.PROYECTO = item.PROYECTO;
                         proceso.ESTADO_PROC = item.ESTADO_PROC;
                         proc.Add(proceso);
@@ -203,7 +201,7 @@ namespace BLL
         {
             using (var contex = new ModelContex())
             {
-                var query = contex.Aspirantes.Where(t => t.AspiranteProceso.Where(tt => tt.ID_PROCESO == idProceso).Count() > 0).ToList();
+                var query = contex.Aspirantes.Where(t => t.Aspirante_Proceso.Where(tt => tt.ID_PROCESO == idProceso).Count() > 0).ToList();
 
                 List<AspirantesEntity> resul = new List<AspirantesEntity>();
                 if (query != null)

@@ -15,7 +15,7 @@ namespace WebApplication1.Controllers
     {
         AspiranteProcesoBLL ap = new AspiranteProcesoBLL();
         // GET api/aspiranteproceso
-        public IList<AspiranteProcesoEntity> Get()
+        public IList<AspiranteProcesoEntity>  Get()
         {
             return ap.GetAll();
         }
@@ -27,7 +27,7 @@ namespace WebApplication1.Controllers
         }
 
         // POST api/aspiranteproceso
-        public void Post(AspiranteProceso a)
+        public void Post(Aspirante_Proceso a)
         {
             ap.AddAspiranteProceso(a);
         }

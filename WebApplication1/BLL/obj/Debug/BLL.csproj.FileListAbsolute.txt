@@ -180,3 +180,17 @@ F:\Nueva carpeta\Drummond\WebApplication1\BLL\bin\Debug\EntityFramework.SqlServe
 F:\Nueva carpeta\Drummond\WebApplication1\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 F:\Nueva carpeta\Drummond\WebApplication1\BLL\obj\Debug\BLL.dll
 F:\Nueva carpeta\Drummond\WebApplication1\BLL\obj\Debug\BLL.pdb
+F:\drummondnuevo\WebApplication1\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+F:\drummondnuevo\WebApplication1\BLL\obj\Debug\BLL.dll
+F:\drummondnuevo\WebApplication1\BLL\bin\Debug\BLL.dll.config
+F:\drummondnuevo\WebApplication1\BLL\bin\Debug\BLL.dll
+F:\drummondnuevo\WebApplication1\BLL\bin\Debug\BLL.pdb
+F:\drummondnuevo\WebApplication1\BLL\bin\Debug\Dal.dll
+F:\drummondnuevo\WebApplication1\BLL\bin\Debug\Entity.dll
+F:\drummondnuevo\WebApplication1\BLL\bin\Debug\EntityFramework.dll
+F:\drummondnuevo\WebApplication1\BLL\bin\Debug\EntityFramework.SqlServer.dll
+F:\drummondnuevo\WebApplication1\BLL\bin\Debug\Dal.pdb
+F:\drummondnuevo\WebApplication1\BLL\bin\Debug\Entity.pdb
+F:\drummondnuevo\WebApplication1\BLL\bin\Debug\EntityFramework.xml
+F:\drummondnuevo\WebApplication1\BLL\bin\Debug\EntityFramework.SqlServer.xml
+F:\drummondnuevo\WebApplication1\BLL\obj\Debug\BLL.pdb

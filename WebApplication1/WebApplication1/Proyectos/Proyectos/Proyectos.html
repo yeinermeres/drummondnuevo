@@ -84,8 +84,6 @@
                                     <th style="width:230px">Programa</th>
                                     <th style="width:245px">Proyecto</th>
                                     <th style="width:225px">Area</th>
-                                    <th>Categoria</th>
-                                    <th>Complejidad Adquisición</th>
                                     <th>Detalle</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -96,12 +94,10 @@
                                     <td>{{Proyec.PROGRAMA}}</td>
                                     <td class="center">{{Proyec.PROYECTO}}</td>
                                     <td class="center">{{Proyec.AREA}}</td>
-                                    <td class="center">{{Proyec.CATEGORIA}}</td>
-                                    <td class="center" style="text-align:center">{{Proyec.COMP_ADQUISICION}}</td>
                                     <td class="center">
                                         <a ng-href="#/Proyecto/Detalleproyec" title="Ver detalle" data-toggle="modal" data-target="#modalDescripcion" ng-click="detalle()"><i class="fa fa-eye" style="font-size:20px;color:#1A7BB9;"></i></a>
                                     </td>
-                                    <td style="text-align: center">
+                                    <td>
                                         <a href="javasrcritp:;" title="Editar Proyecto" ng-click="edit(Proyec)"><i class="fa fa-edit" style="font-size:20px;color:#1A7BB9;padding-right:5px"></i></a>
                                         <a href="javasrcritp:;" title="Anular Proyectos" ng-click="removePR(Proyec)"><i class="fa fa-trash" style="font-size:20px;color:#ED5565;"></i></a>
                                     </td>
@@ -121,153 +117,77 @@
     <div ng-show="visibilidadOff">
         <div class="row">
             <div class="col-lg-12">
-                <div class="tabs-container">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="DatoBasic#tab-1"> Compo Proyectos</a></li>
-                        <li class=""><a data-toggle="tab" href="DatoBasic#tab-2">Info Productos y/o servicios</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="tab-1" class="tab-pane active">
-                            <div class="panel-body">
-
-                                <div class="form-group col-lg-3">
-                                    <label>B/U</label>
-                                    <input type="text" placeholder="" class="form-control" ng-model="Proyec.B_U">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>GL Unit</label>
-                                    <input type="text" placeholder="" class="form-control" ng-model="Proyec.GL_UNIT">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>AFE</label>
-                                    <input type="text" placeholder="" class="form-control" ng-model="Proyec.AFE">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Projer Manager</label>
-                                    <input type="text" class="form-control" ng-click="LoaPromanager()" ng-model="manager.NOMBRE" title="Hacer clic para cargar listado de Pojer manager">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Contrato</label>
-                                    <select class="form-control" ng-model="Proyec.CONTRATO">
-                                        <option></option>
-                                        <option ng-repeat="Confi in Conficto">{{Confi.NOMBRE_CONFIG}}</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Programa</label>
-                                    <input type="text" placeholder="" class="form-control" ng-model="Proyec.PROGRAMA ">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Proyecto</label>
-                                    <input type="text" class="form-control" ng-model="Proyec.PROYECTO">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Area</label>
-                                    <select class="form-control" ng-model="Proyec.AREA">
-                                        <option></option>
-                                        <option>Geología</option>
-                                        <option>Reservoir Eng.</option>
-                                        <option>Drilling</option>
-                                        <option>Const. Facilities </option>
-                                        <option>O&M</option>
-                                        <option>Administrative</option>
-                                        <option>Financial</option>
-                                        <option>HSE</option>
-                                        <option>Regulatory</option>
-                                        <option>PMO</option>
-                                    </select>
-                                </div>
-
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2>Gestión de proyectos</h2>
                             </div>
                         </div>
-
-                        <div id="tab-2" class="tab-pane">
-                            <div class="panel-body">
-                                <div class="form-group col-lg-3">
-                                    <label>Categoria</label>
-                                    <select class="form-control" ng-model="Proyec.CATEGORIA">
-                                        <option></option>
-                                        <option ng-repeat="Confi in ConfiCate">{{Confi.NOMBRE_CONFIG}}</option>
-                                    </select>
-
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Tipo</label>
-                                    <select class="form-control" ng-model="Proyec.TIPO">
-                                        <option></option>
-                                        <option>Servicio</option>
-                                        <option>Producto</option>
-                                        <option>Producto & Servicio.</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Origen</label>
-                                    <select class="form-control" ng-model="Proyec.ORIGEN">
-                                        <option></option>
-                                        <option>Nacional</option>
-                                        <option>Importado</option>
-                                        <option>Nacional o Importado</option>
-                                        <option>Nacional e Importado</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Familia</label>
-                                    <select class="form-control" ng-model="Proyec.FAMILIA">
-                                        <option></option>
-                                        <option ng-repeat="Confi in ConfiFml">{{Confi.NOMBRE_CONFIG}}</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Complejidad Adquisición</label>
-                                    <select class="form-control" ng-model="Proyec.COMP_ADQUISICION ">
-                                        <option></option>
-                                        <option>A</option>
-                                        <option>B</option>
-                                        <option>C</option>
-                                        <option>D</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Descripción General</label>
-                                    <input type="text" placeholder="Descripción General" class="form-control" ng-model="Proyec.DESC_GENERAL">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Tipo de Moneda</label>
-                                    <select class="form-control">
-                                        <option></option>
-                                        <option>USD</option>
-                                        <option>COP</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Presupuesto Objetivo</label>
-                                    <input type="text" placeholder="" class="form-control" ng-model="Proyec.PRESUPUESTO">
-                                </div>
-                                <br />
-                                <center>
-                                    <button type="button" class="btn btn-primary" ng-click="Add()">Registrar</button>
-                                </center>
-
-
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="ibox-content" style="padding-top:-10px">
+                        <div class="panel-body">
+                            <div class="form-group col-lg-3">
+                                <label>B/U</label>
+                                <input type="text" placeholder="" class="form-control" ng-model="Proyec.B_U">
                             </div>
+
+                            <div class="form-group col-lg-3">
+                                <label>GL Unit</label>
+                                <input type="text" placeholder="" class="form-control" ng-model="Proyec.GL_UNIT">
+                            </div>
+
+                            <div class="form-group col-lg-3">
+                                <label>AFE</label>
+                                <input type="text" placeholder="" class="form-control" ng-model="Proyec.AFE">
+                            </div>
+
+                            <div class="form-group col-lg-3">
+                                <label>Projer Manager</label>
+                                <input type="text" class="form-control" ng-click="LoaPromanager()" ng-model="manager.NOMBRE" title="Hacer clic para cargar listado de Pojer manager">
+                            </div>
+
+                            <div class="form-group col-lg-3">
+                                <label>Contrato</label>
+                                <select class="form-control" ng-model="Proyec.CONTRATO">
+                                    <option></option>
+                                    <option ng-repeat="Confi in Conficto">{{Confi.NOMBRE_CONFIG}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-lg-3">
+                                <label>Programa</label>
+                                <input type="text" placeholder="" class="form-control" ng-model="Proyec.PROGRAMA ">
+                            </div>
+
+                            <div class="form-group col-lg-3">
+                                <label>Proyecto</label>
+                                <input type="text" class="form-control" ng-model="Proyec.PROYECTO">
+                            </div>
+
+                            <div class="form-group col-lg-3">
+                                <label>Area</label>
+                                <select class="form-control" ng-model="Proyec.AREA">
+                                    <option></option>
+                                    <option>Geología</option>
+                                    <option>Reservoir Eng.</option>
+                                    <option>Drilling</option>
+                                    <option>Const. Facilities </option>
+                                    <option>O&M</option>
+                                    <option>Administrative</option>
+                                    <option>Financial</option>
+                                    <option>HSE</option>
+                                    <option>Regulatory</option>
+                                    <option>PMO</option>
+                                </select>
+                            </div>
+
                         </div>
                     </div>
-
-
+                    <div class="panel-footer" style="background-color:white">
+                      <center><button type="button" class="btn btn-primary" ng-click="Add()">Registrar</button></center>
+                    </div>
                 </div>
             </div>
         </div>
@@ -277,148 +197,77 @@
     <div ng-show="visibilidadEdit">
         <div class="row">
             <div class="col-lg-12">
-                <div class="tabs-container">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="DatoBas#tab-3"> Compo Proyectos</a></li>
-                        <li class=""><a data-toggle="tab" href="DatoBas#tab-4">Info Productos y/o servicios</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="tab-3" class="tab-pane active">
-                            <div class="panel-body">
-
-                                <div class="form-group col-lg-3">
-                                    <label>B/U</label>
-                                    <input type="text" placeholder="" class="form-control" ng-model="Proyec.B_U">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>GL Unit</label>
-                                    <input type="text" placeholder="" class="form-control" ng-model="Proyec.GL_UNIT">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>AFE</label>
-                                    <input type="text" placeholder="" class="form-control" ng-model="Proyec.AFE">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Projer Manager</label>
-                                    <input type="text" class="form-control" ng-click="LoaPromanager()" ng-model="Proyec.MANAGER">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Contrato</label>
-                                    <select class="form-control" ng-model="Proyec.CONTRATO">
-                                        <option></option>
-                                        <option ng-repeat="Confi in Conficto">{{Confi.NOMBRE_CONFIG}}</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Programa</label>
-                                    <input type="text" placeholder="" class="form-control" ng-model="Proyec.PROGRAMA ">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Proyecto</label>
-                                    <input type="text" class="form-control" ng-model="Proyec.PROYECTO">
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <label>Area</label>
-                                    <select class="form-control" ng-model="Proyec.AREA">
-                                        <option></option>
-                                        <option>Geología</option>
-                                        <option>Reservoir Eng.</option>
-                                        <option>Drilling</option>
-                                        <option>Const. Facilities </option>
-                                        <option>O&M</option>
-                                        <option>Administrative</option>
-                                        <option>Financial</option>
-                                        <option>HSE</option>
-                                        <option>Regulatory</option>
-                                        <option>PMO</option>
-                                    </select>
-                                </div>
-
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2>Edicion de proyectos</h2>
                             </div>
                         </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="panel-body">
 
-                        <div id="tab-4" class="tab-pane">
-                            <div class="panel-body">
-                                <div class="form-group col-lg-3">
-                                    <label>Categoria</label>
-                                    <select class="form-control" ng-model="Proyec.CATEGORIA">
-                                        <option></option>
-                                        <option ng-repeat="Confi in ConfiCate">{{Confi.NOMBRE_CONFIG}}</option>
-                                    </select>
+                            <div class="form-group col-lg-3">
+                                <label>B/U</label>
+                                <input type="text" placeholder="" class="form-control" ng-model="Proyec.B_U">
+                            </div>
 
-                                </div>
+                            <div class="form-group col-lg-3">
+                                <label>GL Unit</label>
+                                <input type="text" placeholder="" class="form-control" ng-model="Proyec.GL_UNIT">
+                            </div>
 
-                                <div class="form-group col-lg-3">
-                                    <label>Tipo</label>
-                                    <select class="form-control" ng-model="Proyec.TIPO">
-                                        <option></option>
-                                        <option>Servicio</option>
-                                        <option>Producto</option>
-                                        <option>Producto & Servicio.</option>
-                                    </select>
-                                </div>
+                            <div class="form-group col-lg-3">
+                                <label>AFE</label>
+                                <input type="text" placeholder="" class="form-control" ng-model="Proyec.AFE">
+                            </div>
 
-                                <div class="form-group col-lg-3">
-                                    <label>Origen</label>
-                                    <select class="form-control" ng-model="Proyec.ORIGEN">
-                                        <option></option>
-                                        <option>Nacional</option>
-                                        <option>Importado</option>
-                                        <option>Nacional o Importado</option>
-                                        <option>Nacional e Importado</option>
-                                    </select>
-                                </div>
+                            <div class="form-group col-lg-3">
+                                <label>Projer Manager</label>
+                                <input type="text" class="form-control" ng-click="LoaPromanager()" ng-model="Proyec.MANAGER">
+                            </div>
 
-                                <div class="form-group col-lg-3">
-                                    <label>Familia</label>
-                                    <select class="form-control" ng-model="Proyec.FAMILIA">
-                                        <option></option>
-                                        <option ng-repeat="Confi in ConfiFml">{{Confi.NOMBRE_CONFIG}}</option>
-                                    </select>
-                                </div>
+                            <div class="form-group col-lg-3">
+                                <label>Contrato</label>
+                                <select class="form-control" ng-model="Proyec.CONTRATO">
+                                    <option></option>
+                                    <option ng-repeat="Confi in Conficto">{{Confi.NOMBRE_CONFIG}}</option>
+                                </select>
+                            </div>
 
-                                <div class="form-group col-lg-3">
-                                    <label>Complejidad Adquisición</label>
-                                    <select class="form-control" ng-model="Proyec.COMP_ADQUISICION ">
-                                        <option></option>
-                                        <option>A</option>
-                                        <option>B</option>
-                                        <option>C</option>
-                                        <option>D</option>
-                                    </select>
-                                </div>
+                            <div class="form-group col-lg-3">
+                                <label>Programa</label>
+                                <input type="text" placeholder="" class="form-control" ng-model="Proyec.PROGRAMA ">
+                            </div>
 
-                                <div class="form-group col-lg-3">
-                                    <label>Descripción General</label>
-                                    <input type="text" placeholder="Descripción General" class="form-control" ng-model="Proyec.DESC_GENERAL">
-                                </div>
+                            <div class="form-group col-lg-3">
+                                <label>Proyecto</label>
+                                <input type="text" class="form-control" ng-model="Proyec.PROYECTO">
+                            </div>
 
-                                <div class="form-group col-lg-3">
-                                    <label>Tipo de Moneda</label>
-                                    <select class="form-control">
-                                        <option></option>
-                                        <option>Dolar</option>
-                                        <option>Pesos</option>
-                                    </select>
-                                </div>
+                            <div class="form-group col-lg-3">
+                                <label>Area</label>
+                                <select class="form-control" ng-model="Proyec.AREA">
+                                    <option></option>
+                                    <option>Geología</option>
+                                    <option>Reservoir Eng.</option>
+                                    <option>Drilling</option>
+                                    <option>Const. Facilities </option>
+                                    <option>O&M</option>
+                                    <option>Administrative</option>
+                                    <option>Financial</option>
+                                    <option>HSE</option>
+                                    <option>Regulatory</option>
+                                    <option>PMO</option>
+                                </select>
+                            </div>
 
-                                <div class="form-group col-lg-3">
-                                    <label>Presupuesto Objetivo</label>
-                                    <input type="text" placeholder="" class="form-control" ng-model="Proyec.PRESUPUESTO">
-                                </div>
-                                <br />
-                                <center>
-                                    <button type="button" class="btn btn-primary" ng-click="update()">Guardar</button>
-                                </center>
-                             </div>
                         </div>
+                    </div>
+                    <div class="panel-footer" style="background-color:white">
+                        <center><button type="button" class="btn btn-primary" ng-click="Add()">Registrar</button></center>
                     </div>
                 </div>
             </div>

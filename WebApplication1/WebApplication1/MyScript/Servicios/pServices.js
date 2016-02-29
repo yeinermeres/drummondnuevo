@@ -14,7 +14,7 @@ app.service("ConfigService", function ($http) {
     };
 
     this.post = function (configuracion) {
-        var req =$http.post(uri+'/api/Config',configuracion);
+        var req = $http.post(uri + '/api/Config', configuracion);
         return req;
     };
 
@@ -137,7 +137,7 @@ app.service("ProcompetitivoServices", function ($http) {
     };
 
     this.getArchivos = function (id) {
-        var req = $http.get(uri + '/api/Procompetitivo/Archivos/'+id);
+        var req = $http.get(uri + '/api/Procompetitivo/Archivos/' + id);
         return req;
     };
 
@@ -217,13 +217,13 @@ app.service("OfertamercantilServices", function ($http) {
 
     var uri = "http://localhost:49372";
 
-    
+
     this.post = function (ofm, pl) {
         var req = $http.post(uri + '/api/Ofertamercantil', ofm);
         return req;
     };
 
-    this.getAll= function (id) {
+    this.getAll = function (id) {
         var req = $http.get(uri + '/api/Ofertamercantil/');
         return req;
     };

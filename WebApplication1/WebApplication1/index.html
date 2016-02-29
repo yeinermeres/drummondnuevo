@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drummond.Ltda | Index</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">    
-    
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
     <!-- Toastr style -->
     <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
@@ -26,7 +26,7 @@
 
     <link href="css/plugins/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
     <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-    
+
 </head>
 <body class="md-skin fixed-sidebar fixed-nav pace-done" id="body">
     <div id="wrapper">
@@ -55,38 +55,45 @@
                                 </ul>
                             </div>
                             <div class="logo-element">
-                                IN+
+                                SAC
                             </div>
                         </li>
                         <li class="active">
                             <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Inicio</span></a>
                         </li>
-                        <li>
-                            <a><i class="fa fa-files-o"></i> <span class="nav-label">Datos basicos</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li><a href="#/DatosBasicos/Configuracion">Configuracion</a></li>
-                                <li><a href="#/DatosBasicos/ProjerManajer">Projer Manager</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Proyectos</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li><a href="#/Proyectos/Proyectos">Registro proyectos</a></li>
+                        <li class="">
+                            <a href=""><i class="fa fa-tasks"></i> <span class="nav-label">Proyecto</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" style="height: 0px;">
+
+                                <li><a href="#/Proyectos/Proyectos">Registro Proyecto</a></li>
                                 <li><a href="#/Proyectos/ProCompetitivo">Proceso competitivo</a></li>
-                                <li>
-                                    <a href="#"><span class="nav-label">Oferta Mercantil</span><span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level collapse">
-                                        <li><a href="#/OFM/REGOFM">Registro</a></li>
-                                        <li><a href="#/OFM/OP">Orden de compra</a></li>
+                                <li class="" style="padding-left:9px">
+                                    <a href="#">Oferta mercantil<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse" style="height: 0px;">
+                                        <li style="padding-left:10px">
+                                            <a href="#/OFM/REGOFM">Registro</a>
+                                        </li>
+                                        <li style="padding-left:16px">
+                                            <a href="#/OFM/OP">Orden de compra</a>
+                                        </li>
+
                                     </ul>
                                 </li>
                             </ul>
                         </li>
+
                         <li><a href="#/Notificaciones"><i class="fa fa-bell"></i><span class="nav-label">Notificaciones</span></a></li>
                         <li><a href="#/Historial"><i class="fa fa-folder"></i><span class="nav-label">Historial</span></a></li>
-                      </ul>
-                    </div>
+                        <li>
+                            <a><i class="fa fa-cog"></i> <span class="nav-label">Configuracion</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="#/DatosBasicos/Configuracion">Datos basicos</a></li>
+                                <li><a href="#/DatosBasicos/ProjerManajer">Projer Manager</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
+            </div>
         </nav>
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="row border-bottom">
@@ -230,7 +237,7 @@
     <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="js/plugins/dataTables/dataTables.responsive.js"></script>
     <script src="js/plugins/dataTables/dataTables.tableTools.min.js"></script>
-    
+
 
     <!-- Data picker -->
     <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
@@ -265,17 +272,17 @@
     <script src="js/ng-table.min.js"></script>
     <!-- Sweet alert -->
     <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
-    
+
 
     <script src="MyScript/Servicios/pServices.js"></script>
     <script src="MyScript/Controller/ConfiguracionController.js"></script>
-    <script src="MyScript/Controller/ProManagerController.js"></script> 
+    <script src="MyScript/Controller/ProManagerController.js"></script>
     <script src="MyScript/Controller/ProyectosController.js"></script>
     <script src="MyScript/Controller/AspiranteController.js"></script>
     <script src="MyScript/Controller/ProCompetitivoController.js"></script>
-    <script src="MyScript/Controller/Ofertamercantilontroller.js"></script>   
+    <script src="MyScript/Controller/Ofertamercantilontroller.js"></script>
     <script src="MyScript/Controller/ordencompraController.js"></script>
-    
+
 
     <script>
         $(document).ready(function () {
@@ -283,7 +290,7 @@
             $("body").removeClass("skin-3");
             $("body").removeClass("skin-1");
             $("body").addClass("md-skin");
-           
+
         });
     </script>
 </body>

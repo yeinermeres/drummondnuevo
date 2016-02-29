@@ -38,25 +38,28 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <dl class="dl-horizontal">
+                                        <dt>Complejidad</dt>
+                                        <dd><span class="label label-primary">{{ProCompetitivo.COMP_ADQUISICION}}</span></dd>
+                                    </dl>
                                     <div class="col-lg-5">
                                         <dl class="dl-horizontal">
                                             <dt>Proceso:</dt>
                                             <dd>{{ProCompetitivo.PROCESO}}</dd>
-                                            <dt>Fecha del Proceso:</dt>
+                                            <dt>Fecha del proceso:</dt>
+                                            <dd>{{ProCompetitivo.FECHA_INIC_SERVICE}}</dd>
+                                            <dt>Fecha del servicio:</dt>
                                             <dd>{{ProCompetitivo.FECHA_INICO}}</dd>
                                             <dt>Tiempo del Proceso:</dt>
                                             <dd>{{ProCompetitivo.TIEMPO_PROCESO}}</dd>
-                                            <dt>Fecha del Servicio:</dt>
-                                            <dd>{{ProCompetitivo.FECHA_INIC_SERVICE}}</dd>
-                                            
+                                           </dl>
+                                    </div>
+                                    <div class="col-lg-7" id="cluster_info">
+                                        <dl class="dl-horizontal">
                                             <dt>Tiempo de Ejecucion:</dt>
                                             <dd>{{ProCompetitivo.TIEMPO_EJECUCION}}</dd>
                                             <dt>Cantidad:</dt>
                                             <dd>{{ProCompetitivo.CANTIDAD}}</dd>
-                                        </dl>
-                                    </div>
-                                    <div class="col-lg-7" id="cluster_info">
-                                        <dl class="dl-horizontal">
                                             <dt>Valor Estimado:</dt>
                                             <dd>{{ProCompetitivo.VALOR_ESTIMADO}}</dd>
                                             <dt>Lugar de Ejecución:</dt>

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Dal
 {
-    public class AspiranteProceso
+    public class Aspirante_Proceso
     {
         [Key]
         public int ID_ASPIRANTEPROCESO { get; set; }
@@ -14,6 +14,5 @@ namespace Dal
         public int ID_PROCESO { get; set; }
         public string RUTA { get; set; }
 
-        //public virtual Aspirantes Aspirante { get; set; }
     }
 }

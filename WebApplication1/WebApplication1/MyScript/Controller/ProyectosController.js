@@ -7,16 +7,12 @@
     ///Objetos para matener los datos al cambiar de pagina
     $rootScope.Proc_Competitivo = {};
     $rootScope.Proc_Competitivos = [];
-    
+
+    $scope.Confi = {}
+    $scope.Conficto = []; //Listado de contratos
 
     $scope.manager = {}; //Objeto Actual
     $scope.managers = []; //Listado de Objetos
-
-    ///Objeto congifuracion
-    $scope.Confi = {}
-    $scope.Conficto = []; //Listado de contratos
-    $scope.ConfiCate = []; //Listado de Categorias
-    $scope.ConfiFml = []; //Listado de Familia
 
     $scope.visibilidadOff = false
     $scope.visibilidadOn = true
@@ -36,16 +32,17 @@
 
     loadRecords();
     loadConfiguracion();
-
     function initialize() {
         $scope.Proyec = {}; //Objeto Actual
-        $scope.manager.PROYEC_ID="";
+
+        $scope.manager.PROYEC_ID = "";
         $scope.manager.DOCUMENTO = "";
         $scope.manager.NOMBRE = "";
         $scope.manager.P_APELLIDO = "";
         $scope.manager.S_APELLIDO = "";
         $scope.DOC_RECUPERADO = ""
         $scope.ProyecPROYEC_ID = "";
+
         $scope.Proyec.B_U = "";
         $scope.Proyec.GL_UNIT = "";
         $scope.Proyec.AFE = "";
@@ -53,27 +50,22 @@
         $scope.Proyec.PROGRAMA = "";
         $scope.Proyec.PROYECTO = "";
         $scope.Proyec.AREA = "";
-        $scope.Proyec.CATEGORIA = "";
-        $scope.Proyec.TIPO = "";
-        $scope.Proyec.ORIGEN = "";
-        $scope.Proyec.FAMILIA = "";
-        $scope.Proyec.COMP_ADQUISICION = "";
-        $scope.Proyec.DESC_GENERAL = "";
-        $scope.Proyec.PRESUPUESTO = "";
         $scope.Proyec.PROYECT_MANAGER = "";
     }
+
+
 
     $scope.LoaPromanager = function () {
         $('#Modalmanager').modal('show');
         loadManager();
-     }
+    }
 
     ///Function para cargar todos los proyectos
     function loadRecords() {
         var promiseGet = ProyectoServices.getAll(); //The Method Call from service
         promiseGet.then(function (pl) {
             $scope.Proyecs = pl.data;
-            },
+        },
               function (errorPl) {
                   $log.error('Error al cargar los datos almacenados', errorPl);
               });
@@ -83,16 +75,42 @@
         var promiseGet = ProyectoServices.get(id); //The Method Call from service
         promiseGet.then(function (pl) {
             $rootScope.Proc_Competitivos = pl.data;
-         },
+            console.log($rootScope.Proc_Competitivos)
+        },
               function (errorPl) {
-                 console.log('Error al cargar los datos almacenados', errorPl);
+                  console.log('Error al cargar los datos almacenados', errorPl);
               });
     }
+
+    function loadConfiguracion() {
+        var promiseGet = ProyectoServices.getAllConfig(); //The Method Call from service
+        promiseGet.then(function (pl) {
+            $scope.Confi = pl.data;
+            angular.forEach($scope.Confi, function (i, item) {
+                switch (i.TIPO_CONFIG) {
+                    case 1:
+                        $scope.Conficto.push(
+                            {
+                                "NOMBRE_CONFIG": i.NOMBRE_CONFIG
+                            }
+                            );
+                        break;
+                }
+
+            })
+
+        },
+              function (errorPl) {
+                  $log.error('Error al cargar los datos almacenados', errorPl);
+              });
+    }
+
 
     $scope.Cargar = function () {
         $scope.manager = this.manager;
         ///console.log($scope.manager.NOMBRE)
         $('#Modalmanager').modal('hide');
+        $scope.Proyec.MANAGER = $scope.manager.NOMBRE + " " + $scope.manager.P_APELLIDO + " " + $scope.manager.S_APELLIDO;
         $scope.manager.NOMBRE = $scope.manager.NOMBRE + " " + $scope.manager.P_APELLIDO + " " + $scope.manager.S_APELLIDO;
         localStorage.setItem("DOCUMENTO", $scope.manager.ID_PROMANAGER);
     };
@@ -102,46 +120,6 @@
         var promiseGet = ProyectoServices.getAllManager(); //The Method Call from service
         promiseGet.then(function (pl) {
             $scope.managers = pl.data;
-            },
-              function (errorPl) {
-                  $log.error('Error al cargar los datos almacenados', errorPl);
-              });
-    }
-
-    ///Function para cargar todos los proyectos
-    function loadConfiguracion() {
-        var promiseGet = ProyectoServices.getAllConfig(); //The Method Call from service
-        promiseGet.then(function (pl) {
-            $scope.Confi = pl.data;
-            angular.forEach($scope.Confi, function (i, item) {
-                switch (i.TIPO_CONFIG)
-                {
-                    case 1:
-                        $scope.Conficto.push(
-                            {
-                                "NOMBRE_CONFIG": i.NOMBRE_CONFIG
-                            }
-                            );
-                        break;
-
-                    case 2:
-                        $scope.ConfiCate.push(
-                            {
-                                "NOMBRE_CONFIG": i.NOMBRE_CONFIG
-                            }
-                            );
-                        break;
-                    case 3:
-                        $scope.ConfiFml.push(
-                            {
-                                "NOMBRE_CONFIG": i.NOMBRE_CONFIG
-                            }
-                            );
-                        break;
-                }
-
-            })
-            
         },
               function (errorPl) {
                   $log.error('Error al cargar los datos almacenados', errorPl);
@@ -154,19 +132,12 @@
         var DOCUMENTO_M = localStorage.getItem("DOCUMENTO");
 
         proyecto.B_U = $scope.Proyec.B_U;
-        proyecto.GL_UNIT=$scope.Proyec.GL_UNIT;
+        proyecto.GL_UNIT = $scope.Proyec.GL_UNIT;
         proyecto.AFE = $scope.Proyec.AFE;
         proyecto.CONTRATO = $scope.Proyec.CONTRATO;
         proyecto.PROGRAMA = $scope.Proyec.PROGRAMA;
         proyecto.PROYECTO = $scope.Proyec.PROYECTO;
         proyecto.AREA = $scope.Proyec.AREA;
-        proyecto.CATEGORIA = $scope.Proyec.CATEGORIA;
-        proyecto.TIPO = $scope.Proyec.TIPO;
-        proyecto.ORIGEN = $scope.Proyec.ORIGEN;
-        proyecto.FAMILIA = $scope.Proyec.FAMILIA;
-        proyecto.COMP_ADQUISICION = $scope.Proyec.COMP_ADQUISICION;
-        proyecto.DESC_GENERAL = $scope.Proyec.DESC_GENERAL;
-        proyecto.PRESUPUESTO = $scope.Proyec.PRESUPUESTO;
         proyecto.PROYEC_MANAGER = DOCUMENTO_M;
         var result = ProyectoServices.post(proyecto);
         result.then(function () {
@@ -204,11 +175,11 @@
     $scope.removePR = function () {
         $scope.Promager = this.Proyec;
         var id = $scope.Promager.PROYEC_ID
-  
+
         swal({
             title: "Mensaje de confirmación",
             text: "¿Esta seguro que desea anular el proyecto?" +
-            "\n"+ $scope.Promager.PROYECTO,
+            "\n" + $scope.Promager.PROYECTO,
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -216,7 +187,7 @@
             cancelButtonText: "No",
             closeOnConfirm: false,
             closeOnCancel: false
-            },
+        },
             function (isConfirm) {
                 if (isConfirm) {
                     var result = ProyectoServices.delete($scope.Promager.PROYEC_ID);
@@ -240,7 +211,7 @@
         $scope.editMode = true;
         $scope.visibilidadEdit = true;
         $scope.visibilidadOn = false;
-      };
+    };
 
     $scope.editOn = function () {
         $scope.editMode = false;

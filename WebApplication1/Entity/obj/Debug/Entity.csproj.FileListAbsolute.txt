@@ -50,3 +50,7 @@ F:\Nueva carpeta\Drummond\WebApplication1\Entity\bin\Debug\Entity.pdb
 F:\Nueva carpeta\Drummond\WebApplication1\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
 F:\Nueva carpeta\Drummond\WebApplication1\Entity\obj\Debug\Entity.dll
 F:\Nueva carpeta\Drummond\WebApplication1\Entity\obj\Debug\Entity.pdb
+F:\drummondnuevo\WebApplication1\Entity\obj\Debug\Entity.dll
+F:\drummondnuevo\WebApplication1\Entity\obj\Debug\Entity.pdb
+F:\drummondnuevo\WebApplication1\Entity\bin\Debug\Entity.dll
+F:\drummondnuevo\WebApplication1\Entity\bin\Debug\Entity.pdb

@@ -28,6 +28,8 @@ namespace Dal
         /// </summary>
         public int PROC_OFM { get; set; }
 
+        public virtual Proceso_Competitivo proceso_competitivo { get; set; }
+
         [ForeignKey("OFERTAMERCANTIL")]
         private ICollection<Polizas> Polizas { get; set; }
 

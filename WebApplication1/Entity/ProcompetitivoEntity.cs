@@ -23,5 +23,6 @@ namespace Entity
         public decimal VALOR_TOTAL { get; set; }
         public int PROYECTO_COMPETITIVO { get; set; }
         public string ESTADO_PROC { get; set; }
+        public string COMP_ADQUISICION { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace Dal
         public string TELEFONO { get; set; }
 
         [ForeignKey("ID_ASPIRANTE")]
-        public virtual ICollection<AspiranteProceso> AspiranteProceso { get; set; }
+        public virtual ICollection<Aspirante_Proceso> Aspirante_Proceso { get; set; }
+
     }
 }

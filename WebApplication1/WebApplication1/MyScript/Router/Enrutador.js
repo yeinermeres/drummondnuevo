@@ -1,8 +1,8 @@
 var app;
 (function () {
     app = angular.module("myApp", ["ui.bootstrap", 'ngRoute', "ngTable"]);
-    app.config(['$routeProvider', '$locationProvider', 
-        function AppConfig($routeProvider, $locationProvider){
+    app.config(['$routeProvider', '$locationProvider',
+        function AppConfig($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/DatosBasicos/Configuracion', {
                     templateUrl: 'DatosBasicos/Configuracion.html',
@@ -25,7 +25,7 @@ var app;
                     controller: 'ProCompetitivoController'
                 })
                 .when('/DetalleCompetitivo', {
-                    templateUrl: 'Proyectos/ProcesoCompetitivo/Detalle_Procompetitivo.html',                    
+                    templateUrl: 'Proyectos/ProcesoCompetitivo/Detalle_Procompetitivo.html',
                 })
                 .when('/Proyectos/RegistroAspirante', {
                     templateUrl: 'Proyectos/ProcesoCompetitivo/RegistroAspirante.html',

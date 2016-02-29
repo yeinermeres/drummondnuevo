@@ -17,6 +17,7 @@ namespace Dal
         public string P_APELLIDO { get; set; }
         public string S_APELLIDO { get; set; }
         public string CARGO { get; set; }
+
         [ForeignKey("PROYEC_MANAGER")]
         public virtual ICollection<Proyecto> proyecto { get; set; }
     }

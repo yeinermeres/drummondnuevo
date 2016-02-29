@@ -17,8 +17,7 @@ namespace Dal
         public DbSet<Oferta_Mercantil> Oferta_mercantil { get; set;}
         public DbSet<Polizas> Polizas { get; set; }
         public DbSet<Aspirantes> Aspirantes { get; set; }
-        public DbSet<AspiranteProceso> AspiranteProceso { get; set; }
+        public DbSet<Aspirante_Proceso> Aspirantes_proceso { get; set; }
 
-         
     }
 }

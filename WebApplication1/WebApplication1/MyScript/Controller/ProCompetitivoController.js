@@ -1,4 +1,4 @@
-﻿app.controller('ProCompetitivoController', function ($scope, ProcompetitivoServices, $rootScope) {
+﻿app.controller('ProCompetitivoController', function ($scope, ProcompetitivoServices, ProyectoServices, $rootScope) {
 
     $scope.visibilidadOff = false
     $scope.visibilidadOn = true
@@ -12,6 +12,12 @@
     $scope.Proceso = {};//Objeto actual
     $scope.Procesos = [];//Listado de Objetos
 
+    ///Objeto congifuracion
+    $scope.Confi = {}
+    $scope.Conficto = []; //Listado de contratos
+    $scope.ConfiCate = []; //Listado de Categorias
+    $scope.ConfiFml = []; //Listado de Familia
+
     var file;
     ///Datos proyectos
     $scope.Proyec = {};//Objeto actual
@@ -23,15 +29,14 @@
     $scope.archi = {};
     $scope.archivos = [];
 
+    loadConfiguracion();
     loadRecordProyectos();
     loadRecords();
     loadRecordAspirantes();
     inicialize();
 
     $scope.CurrentDate = new Date();//Fecha actual
-    
 
-    
 
     function inicialize() {
         $scope.Proyec = {};
@@ -40,21 +45,72 @@
 
         $scope.Proyec.PROYECTO = "";
         $scope.Proyec.COMP_ADQUISICION = "";
-        
-        ///atos proceso competitivo
-        $scope.Proceso.PROCESO ="";
+
+        ///datos proceso competitivo
+
+        $scope.Proceso.CATEGORIA = "";
+        $scope.Proceso.TIPO = "";
+        $scope.Proceso.ORIGEN = "";
+        $scope.Proceso.FAMILIA = "";
+        $scope.Proceso.COMP_ADQUISICION = "";
+        $scope.Proceso.DESC_GENERAL = "";
+        $scope.Proceso.PRESUPUESTO = "";
+
+        $scope.Proceso.LUGAR_EJECUCION = ""
+        $scope.Proceso.PROCESO = "";
         $scope.Proceso.PROCESO_INICIO;
-        $scope.Proceso.TIEMPO_PROCESO ="";
+        $scope.Proceso.TIEMPO_PROCESO = "";
         $scope.Proceso.FECHA_INICO = "";
         $scope.Proceso.FECHA_INIC_SERVICE = "";
-        $scope.Proceso.TIEMPO_EJECUCION ="";
-        $scope.Proceso.DETALLE_PS ="";
-        $scope.Proceso.CANTIDAD ="";
-        $scope.Proceso.UNIDAD ="";
-        $scope.Proceso.LUGAR_EJECUCION ="";
-        $scope.Proceso.VALOR_ESTIMADO="";
-        $scope.Proceso.VALOR_TOTAL="";
-        $scope.Proceso.PROYECTO_COMPETITIVO=""
+        $scope.Proceso.TIEMPO_EJECUCION = "";
+        $scope.Proceso.DETALLE_PS = "";
+        $scope.Proceso.CANTIDAD = "";
+        $scope.Proceso.UNIDAD = "";
+        $scope.Proceso.LUGAR_EJECUCION = "";
+        $scope.Proceso.VALOR_TOTAL = "";
+        $scope.Proceso.PROYECTO_COMPETITIVO = ""
+        $scope.Proceso.COMP_ADQUISICION = "";
+        $scope.Proceso.TIPO_MONEDA = "";
+    }
+
+
+    ///Function para cargar todos los proyectos
+    function loadConfiguracion() {
+        var promiseGet = ProyectoServices.getAllConfig(); //The Method Call from service
+        promiseGet.then(function (pl) {
+            $scope.Confi = pl.data;
+            angular.forEach($scope.Confi, function (i, item) {
+                switch (i.TIPO_CONFIG) {
+                    case 1:
+                        $scope.Conficto.push(
+                            {
+                                "NOMBRE_CONFIG": i.NOMBRE_CONFIG
+                            }
+                            );
+                        break;
+
+                    case 2:
+                        $scope.ConfiCate.push(
+                            {
+                                "NOMBRE_CONFIG": i.NOMBRE_CONFIG
+                            }
+                            );
+                        break;
+                    case 3:
+                        $scope.ConfiFml.push(
+                            {
+                                "NOMBRE_CONFIG": i.NOMBRE_CONFIG
+                            }
+                            );
+                        break;
+                }
+
+            })
+
+        },
+              function (errorPl) {
+                  $log.error('Error al cargar los datos almacenados', errorPl);
+              });
     }
 
     function loadRecordProyectos() {
@@ -72,7 +128,8 @@
         var promiseGet = ProcompetitivoServices.getAll(); //The Method Call from service
         promiseGet.then(function (pl) {
             $scope.Procesos = pl.data;
-          
+            console.log($scope.Procesos)
+
         },
            function (errorPl) {
                console.log('Error al cargar los datos almacenados', errorPl);
@@ -117,8 +174,6 @@
     $scope.CerrarModal = function () {
         $('#modalAspirantes').modal('hide')
     }
-
-    
 
     $scope.CargarAsp = function () {
         $scope.Aspirante = this.Aspirante;
@@ -186,39 +241,47 @@
 
         $('#modalAspirantes').modal('hide');
     };
-    
-    $scope.Cargar = function () {
+
+    $scope.Cargar = function (d) {
         $scope.Proyec = this.Proyec;
         $scope.Proyec.PROYECTO = $scope.Proyec.PROYECTO;
-        $scope.Proceso.LUGAR_EJECUCION = $scope.Proyec.CONTRATO;
-        switch ($scope.Proyec.COMP_ADQUISICION) {
-            
-            case "A":
-                $scope.Proyec.COMP_ADQUISICION = 180;
-                calcularFI($scope.Proyec.COMP_ADQUISICION);
-                break;
-            case "B":
-                $scope.Proyec.COMP_ADQUISICION = 120;
-                calcularFI($scope.Proyec.COMP_ADQUISICION);
-                break;
-            case "C":
-                $scope.Proyec.COMP_ADQUISICION = 90;
-                calcularFI($scope.Proyec.COMP_ADQUISICION);
-                break
-            case "D":
-                $scope.Proyec.COMP_ADQUISICION = 60;
-                calcularFI($scope.Proyec.COMP_ADQUISICION);
-                break;
-        }
         localStorage.setItem('PROYECTO', $scope.Proyec.PROYEC_ID)
         $('#modalproyectos').modal('hide')
     }
 
-    
+    $scope.TimeProces = function () {
+        switch ($scope.Proceso.COMP_ADQUISICION) {
+
+            case "A":
+                $scope.Proceso.TIEMPO_PROCESO = 180;
+                calcularFI($scope.Proceso.TIEMPO_PROCESO);
+                break;
+            case "B":
+                $scope.Proceso.TIEMPO_PROCESO = 120;
+                calcularFI($scope.Proceso.TIEMPO_PROCESO);
+                break;
+            case "C":
+                $scope.Proceso.TIEMPO_PROCESO = 90;
+                calcularFI($scope.Proceso.TIEMPO_PROCESO);
+                break
+            case "D":
+                $scope.Proceso.TIEMPO_PROCESO = 60;
+                calcularFI($scope.Proceso.TIEMPO_PROCESO);
+                break;
+        }
+    }
 
     $scope.Add = function () {
-        var Proceso= {}
+        var Proceso = {}
         var PROYECTO = localStorage.getItem("PROYECTO");
+
+        Proceso.CATEGORIA = $scope.Proceso.CATEGORIA;
+        Proceso.TIPO = $scope.Proceso.TIPO;
+        Proceso.ORIGEN = $scope.Proceso.ORIGEN;
+        Proceso.FAMILIA = $scope.Proceso.FAMILIA;
+        Proceso.COMP_ADQUISICION = $scope.Proceso.COMP_ADQUISICION;
+        Proceso.DESC_GENERAL = $scope.Proceso.DESC_GENERAL;
+        Proceso.PRESUPUESTO = $scope.Proceso.PRESUPUESTO;
         Proceso.PROCESO = $scope.Proceso.PROCESO;
         Proceso.PROCESO_INICIO = $scope.Proceso.PROCESO_INICIO;
         Proceso.TIEMPO_PROCESO = $scope.Proyec.COMP_ADQUISICION
@@ -232,6 +295,9 @@
         Proceso.VALOR_ESTIMADO = $scope.Proceso.VALOR_ESTIMADO;
         Proceso.VALOR_TOTAL = $scope.Proceso.VALOR_TOTAL;
         Proceso.PROYECTO_COMPETITIVO = PROYECTO;
+        Proceso.LUGAR_EJECUCION = $scope.Proceso.LUGAR_EJECUCION;
+        Proceso.TIPO_MONEDA = $scope.Proceso.TIPO_MONEDA;
+
         var result = ProcompetitivoServices.post(Proceso);
         result.then(function () {
             toastr.options = {
@@ -255,12 +321,12 @@
             loadRecord();
             localStorage.removeItem("PROYECTO")
         },
-        setTimeout(function () {$scope.Cargartodo()},1000),
+        setTimeout(function () { $scope.Cargartodo() }, 1000),
         function (errorpl) {
             console.log(errorpl)
         });
-        
-        
+
+
     };
 
     $scope.getArchivo = function (id) {
@@ -279,8 +345,7 @@
     var rutas = function (dto) {
         document.getElementById("rutas").innerHTML = "";
         var rt = "";
-        if (dto.length === 0)
-         {
+        if (dto.length === 0) {
             toastr.options = {
                 "closeButton": true,
                 "debug": false,
@@ -299,9 +364,8 @@
             };
             toastr.warning("No existen documentos adjuntos para este proceso competitivo", "Notificaciones");
         }
-        else
-        {
-           
+        else {
+
             var item = "<table class='table table-striped'>"
             item += "<thead>";
             item += "<tr>";
@@ -310,8 +374,8 @@
             item += "</tr>";
             item += "</thead>";
             for (i = 0; i < dto.length; i++) {
-                rt  = dto[i].RUTA;
-                var res = rt.substring(70,90);
+                rt = dto[i].RUTA;
+                var res = rt.substring(70, 90);
                 item += "<tbody>";
                 item += "<tr class='gradeX'>";
                 item += '<td>' + res + '</td>';
@@ -325,32 +389,33 @@
             $("#rutas").append(item);
             $("#modalRutas").modal("show");
         }
-       
+
     }
 
     ver = function (rt) {
         alert(rt);
     }
+
     var calcularFI = function (dias) {
         $scope.Proceso.FECHA_INICO = "";
         $scope.Proceso.FECHA_INIC_SERVICE = "";
 
         $scope.YearAct = $scope.CurrentDate.getFullYear();
-        $scope.MesAct = ('0' + ($scope.CurrentDate.getMonth()+1)).slice(-2);
+        $scope.MesAct = ('0' + ($scope.CurrentDate.getMonth() + 1)).slice(-2);
         $scope.DiaAct = ('0' + $scope.CurrentDate.getDate()).slice(-2);
 
         $scope.Proceso.FECHA_INICO = $scope.MesAct + "/" + $scope.DiaAct + "/" + $scope.YearAct;
         console.log($scope.Proceso.FECHA_INICO)
 
         var result = new Date($scope.Proceso.FECHA_INICO);
-            result.setDate(result.getDate() + dias);
+        result.setDate(result.getDate() - dias);
 
-            /*console.log('0' + (result.getDate() + 1));
-            console.log(('0' + (result.getMonth() + 1)));
-            console.log(result.getFullYear());*/
-            
-            $scope.Proceso.FECHA_INIC_SERVICE =('0' + (result.getMonth() + 1)).slice(-2) +"/"+ ('0' + (result.getDate())).slice(-2)  +"/" + result.getFullYear();
-            //alert($scope.Proceso.FECHA_INIC_SERVICE);
+        /*console.log('0' + (result.getDate() + 1));
+        console.log(('0' + (result.getMonth() + 1)));
+        console.log(result.getFullYear());*/
+
+        $scope.Proceso.FECHA_INIC_SERVICE = ('0' + (result.getMonth() + 1)).slice(-2) + "/" + ('0' + (result.getDate())).slice(-2) + "/" + result.getFullYear();
+        //alert($scope.Proceso.FECHA_INIC_SERVICE);
     }
 
     $scope.Mostrar = function () {
@@ -387,20 +452,20 @@
             item += "<tr>";
             item += "<td>" + parseInt(i + 1) + ".</td>";
             item += "<td>" + archivos[i].file.name + "</td>";
-            item += "<td style='font-size:12px'>" + (archivos[i].file.size / (1024 * 1024)).toFixed(2) + " MG</td>" ;
+            item += "<td style='font-size:12px'>" + (archivos[i].file.size / (1024 * 1024)).toFixed(2) + " MG</td>";
             item += '</td>';
             item += '<td>';
             item += '<a href="javasrcritp:;" title="Remover archivo" onclick="angular.element(this).scope().Removeritem(' + i + ');"><i class="fa fa-trash" style="font-size:20px;color:#ED5565;margin-left:20px"></i></a>';
             item += '</td>';
-           item +="</tr>";
+            item += "</tr>";
         }
         $("#lista").append(item);
         item += '</table>';
-       
-        
+
+
     }
 
-    $scope.Removeritem = function(i) {
+    $scope.Removeritem = function (i) {
         alert(i)
     }
 

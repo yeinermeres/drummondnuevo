@@ -20,17 +20,11 @@ namespace Dal
         public string PROGRAMA { get; set; }
         public string PROYECTO { get; set; }
         public string AREA { get; set; }
-        public string CATEGORIA { get; set; }
-        public string TIPO { get; set; }
-        public string ORIGEN { get; set; }
-        public string FAMILIA { get; set; }
-        public string COMP_ADQUISICION { get; set; }
-        public string DESC_GENERAL { get; set; }
-        public decimal PRESUPUESTO { get; set; }
         public string ESTADO_PROYEC { get; set; }
-        public int PROYEC_MANAGER{ get; set; }
+        public int PROYEC_MANAGER { get; set; }
+        public virtual Proyec_Manager Proyer_Manager { get; set; }
 
-       [ForeignKey("PROYECTO_COMPETITIVO")]
+        [ForeignKey("PROYECTO_COMPETITIVO")]
         public virtual ICollection<Proceso_Competitivo> Proc_Competitivos { get; set; }
 
    }

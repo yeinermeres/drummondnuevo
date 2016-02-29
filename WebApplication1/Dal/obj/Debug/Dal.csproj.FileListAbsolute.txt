@@ -139,3 +139,20 @@ F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.csproj.GenerateResou
 F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.dll
 F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.pdb
 F:\Nueva carpeta\Drummond\WebApplication1\Dal\obj\Debug\Dal.Migrations.aspirantes.resources
+F:\drummondnuevo\WebApplication1\Dal\bin\Debug\Dal.dll.config
+F:\drummondnuevo\WebApplication1\Dal\bin\Debug\Dal.dll
+F:\drummondnuevo\WebApplication1\Dal\bin\Debug\Dal.pdb
+F:\drummondnuevo\WebApplication1\Dal\bin\Debug\EntityFramework.dll
+F:\drummondnuevo\WebApplication1\Dal\bin\Debug\EntityFramework.SqlServer.dll
+F:\drummondnuevo\WebApplication1\Dal\bin\Debug\EntityFramework.xml
+F:\drummondnuevo\WebApplication1\Dal\bin\Debug\EntityFramework.SqlServer.xml
+F:\drummondnuevo\WebApplication1\Dal\obj\Debug\Dal.Migrations.L.resources
+F:\drummondnuevo\WebApplication1\Dal\obj\Debug\Dal.Migrations.ofm.resources
+F:\drummondnuevo\WebApplication1\Dal\obj\Debug\Dal.Migrations.Polizas.resources
+F:\drummondnuevo\WebApplication1\Dal\obj\Debug\Dal.Migrations.polizacod.resources
+F:\drummondnuevo\WebApplication1\Dal\obj\Debug\Dal.Migrations.addestadoPRC.resources
+F:\drummondnuevo\WebApplication1\Dal\obj\Debug\Dal.Migrations.FROFMPROC.resources
+F:\drummondnuevo\WebApplication1\Dal\obj\Debug\Dal.csproj.GenerateResource.Cache
+F:\drummondnuevo\WebApplication1\Dal\obj\Debug\Dal.dll
+F:\drummondnuevo\WebApplication1\Dal\obj\Debug\Dal.pdb
+F:\drummondnuevo\WebApplication1\Dal\obj\Debug\Dal.Migrations.aspirantes.resources
